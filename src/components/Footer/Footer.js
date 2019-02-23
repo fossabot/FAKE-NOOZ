@@ -9,7 +9,7 @@ const Footer = () => (
         className={classNames('mb-0', 'bg-light', 'text-center', 'text-muted')}
     >
         <Container>
-            &copy; {new Date().getFullYear()} Grant Burry
+            &copy; {new Date().getFullYear()} Grant Burry & Vamshi Arugonda
             <span className={classNames(styles.spacer, 'mx-2')}>&middot;</span>
             {process.env.NODE_ENV === 'development' ? (
                 <span className="text-danger">Development Mode</span>

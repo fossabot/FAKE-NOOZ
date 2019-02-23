@@ -8,7 +8,10 @@
         "type": "git",
         "url": "https://github.com/Burry/CSCI-4849-Project-1.git"
     },
-    "author": "Grant Burry <grant@burry.me> (https://grantburry.com)",
+    "contributors": [
+        "Grant Burry <grant@burry.me> (https://grantburry.com)",
+        "Vamshi Arugonda <vamshi.arugonda@colorado.edu>"
+    ],
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
