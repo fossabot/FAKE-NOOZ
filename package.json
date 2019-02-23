@@ -15,8 +15,8 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "predeploy": "react-scripts build && cat CNAME > ./build/CNAME",
-        "deploy": "gh-pages -d build",
+        "predeploy": "react-scripts build",
+        "deploy": "cat CNAME > ./build/CNAME && gh-pages -d build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "precommit": "lint-staged"
