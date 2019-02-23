@@ -1,0 +1,13 @@
+@import '../../styles/variables';
+
+.refreshBtn {
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.alertContent {
+    width: calc(100% - 2.5em);
+}

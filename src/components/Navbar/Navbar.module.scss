@@ -1,0 +1,27 @@
+@import '../../styles/variables';
+
+.root {
+    z-index: 1;
+}
+
+.link {
+    color: $secondary;
+    font-size: 0.75rem;
+    padding-top: 0.75rem;
+
+    &:hover,
+    &.active {
+        color: $primary !important;
+    }
+}
+
+.icon {
+    font-size: 1.25rem;
+}
+
+@supports (backdrop-filter: blur(15px)) {
+    .root {
+        background: rgba($white, 0.75);
+        backdrop-filter: blur(15px);
+    }
+}
