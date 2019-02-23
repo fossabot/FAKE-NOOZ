@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { NavLink as Link } from 'react-router-dom';
-import { Container, Navbar as BSNavbar, Nav } from 'react-bootstrap';
+import { Container, Navbar, Nav } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/pro-solid-svg-icons';
 import styles from './Navbar.module.scss';
@@ -20,10 +20,16 @@ const iconClass = classNames(
     'd-lg-block'
 );
 
-const Navbar = () => (
-    <BSNavbar bg="white" expand="lg" className={styles.root}>
+const CustomNavbar = () => (
+    <Navbar
+        collapseOnSelect
+        bg="white"
+        variant="light"
+        expand="lg"
+        className={styles.root}
+    >
         <Container>
-            <BSNavbar.Brand
+            <Navbar.Brand
                 as={Link}
                 to="/"
                 className={classNames('d-flex', 'align-items-center')}
@@ -38,9 +44,9 @@ const Navbar = () => (
                 >
                     My App
                 </h4>
-            </BSNavbar.Brand>
-            <BSNavbar.Toggle label="Toggle Navbar" aria-controls="navbar-nav" />
-            <BSNavbar.Collapse id="navbar-nav">
+            </Navbar.Brand>
+            <Navbar.Toggle label="Toggle Navbar" aria-controls="navbar-nav" />
+            <Navbar.Collapse id="navbar-nav">
                 <Nav className="ml-auto">
                     <Nav.Link as={Link} to="/user" className={linkClass}>
                         <FontAwesomeIcon
@@ -51,9 +57,9 @@ const Navbar = () => (
                         User
                     </Nav.Link>
                 </Nav>
-            </BSNavbar.Collapse>
+            </Navbar.Collapse>
         </Container>
-    </BSNavbar>
+    </Navbar>
 );
 
-export default Navbar;
+export default CustomNavbar;

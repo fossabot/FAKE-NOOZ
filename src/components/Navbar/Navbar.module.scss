@@ -8,11 +8,6 @@
     color: $secondary;
     font-size: 0.75rem;
     padding-top: 0.75rem;
-
-    &:hover,
-    &.active {
-        color: $primary !important;
-    }
 }
 
 .icon {
