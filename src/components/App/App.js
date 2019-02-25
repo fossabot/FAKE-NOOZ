@@ -22,7 +22,7 @@ const App = () => {
         <HotKeys handlers={keyHandlers} focused tabIndex="-1">
             <BrowserRouter>
                 <>
-                    <Helmet defaultTitle="Fake Nooz" />
+                    <Helmet defaultTitle="FAKE NOOZ" />
                     <Navbar
                         round={round}
                         score={score}

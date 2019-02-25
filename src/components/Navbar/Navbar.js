@@ -30,20 +30,16 @@ const CustomNavbar = ({ round, score, setScore, setRound, handleNewGame }) => (
                 'justify-content-between'
             )}
         >
-            <Navbar.Brand
-                as={Link}
-                to="/"
-                className={classNames('d-flex', 'align-items-center')}
-            >
+            <Navbar.Brand as={Link} to="/">
                 <h4
                     className={classNames(
-                        'd-inline',
-                        'm-0',
+                        'mb-0',
                         'ml-2',
-                        'text-danger'
+                        'text-danger',
+                        'font-weight-bold'
                     )}
                 >
-                    Fake Nooz
+                    FAKE NOOZ
                 </h4>
             </Navbar.Brand>
             <div
@@ -56,13 +52,11 @@ const CustomNavbar = ({ round, score, setScore, setRound, handleNewGame }) => (
                 )}
             >
                 <h5 className="mr-3">
-                    Round
-                    <br />
+                    <div>Round</div>
                     <small>{round}</small>
                 </h5>
                 <h5 className="ml-3">
-                    Score
-                    <br />
+                    <div>Score</div>
                     <small>{score}</small>
                 </h5>
             </div>
