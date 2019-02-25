@@ -38,23 +38,28 @@ const feedMetadata = [
         real: true
     },
     {
-        link: 'http://feeds.reuters.com/reuters/topNews',
+        link: 'https://www.npr.org/rss/rss.php?id=1001',
         real: true
     }
 ];
 
-const randomElement = array => array[Math.floor(Math.random() * array.length)];
+const randomElement = array =>
+    array ? array[Math.floor(Math.random() * array.length)] : null;
 
 const randomArticle = feeds => {
-    const { title: source, real, items } = randomElement(feeds);
-    const { title, content, link } = randomElement(items);
-    return {
-        source,
-        real,
-        title,
-        content,
-        link
-    };
+    try {
+        const { title: source, real, items } = randomElement(feeds);
+        const { title, content, link } = randomElement(items);
+        return {
+            source,
+            real,
+            title,
+            content,
+            link
+        };
+    } catch {
+        return randomArticle(feeds);
+    }
 };
 
 const Loading = () => (
@@ -85,13 +90,16 @@ const Result = ({
         <>
             <Card bg={winVariant} border={winVariant} className="text-center">
                 <Card.Body>
-                    <Card.Title>
+                    <Card.Title as="h4">
+                        {win ? 'Correct!' : 'Incorrect'}
+                    </Card.Title>
+                    <h5>
                         <FontAwesomeIcon
                             icon={real ? faCheckCircle : faTimesCircle}
                             className="mr-2"
                         />
                         {real ? 'Real News' : 'Fake News'}
-                    </Card.Title>
+                    </h5>
                     <h6>{source}</h6>
                     <a
                         href={link}
