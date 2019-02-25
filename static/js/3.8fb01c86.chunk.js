@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{93:function(e,n,t){"use strict";t.r(n);var a=t(0),c=t.n(a),r=t(39),l=t.n(r),o=t(82);n.default=function(){return c.a.createElement(o.a,{className:"py-5"},c.a.createElement(l.a,{title:"My App \xbb Home"}),c.a.createElement("h3",null,"It works!"))}}}]);
-//# sourceMappingURL=3.8fb01c86.chunk.js.map

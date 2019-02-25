@@ -1,7 +1,7 @@
 {
-    "name": "My App",
-    "short_name": "My App",
-    "description": "Some stupid app",
+    "name": "Fake Nooz",
+    "short_name": "Fake Nooz",
+    "description": "Can you tell what's fake news and what is real?",
     "start_url": "/",
     "display": "standalone",
     "theme_color": "#007bff",
