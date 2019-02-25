@@ -60,7 +60,7 @@ const CustomNavbar = ({ round, score, setScore, setRound, handleNewGame }) => (
                     <small>{score}</small>
                 </h5>
             </div>
-            <Nav>
+            <Nav role="navigation">
                 {handleNewGame && (
                     <Nav.Link className={linkClass} onClick={handleNewGame}>
                         <FontAwesomeIcon

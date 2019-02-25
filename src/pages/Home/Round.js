@@ -9,7 +9,7 @@ const Round = ({ article, handleRealButton, handleFakeButton }) => (
     <>
         <Card bg="dark" border="dark">
             <Card.Body>
-                <Card.Title>{article.title}</Card.Title>
+                <Card.Title aria-label="Article title">{article.title}</Card.Title>
                 <article /* eslint-disable react/no-danger */
                     dangerouslySetInnerHTML={{
                         __html: article.content
@@ -37,6 +37,7 @@ const Round = ({ article, handleRealButton, handleFakeButton }) => (
                 variant="success"
                 size="lg"
                 className="mr-3"
+                aria-label="It's real"
                 onClick={handleRealButton}
             >
                 <FontAwesomeIcon icon={faCheckCircle} className="mr-2" />
@@ -46,6 +47,7 @@ const Round = ({ article, handleRealButton, handleFakeButton }) => (
                 variant="danger"
                 size="lg"
                 className="ml-3"
+                aria-label="It's fake"
                 onClick={handleFakeButton}
             >
                 <FontAwesomeIcon icon={faTimesCircle} className="mr-2" />

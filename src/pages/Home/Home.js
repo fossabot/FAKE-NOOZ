@@ -17,17 +17,17 @@ const randomElement = array =>
 
 const randomArticle = feeds => {
     try {
-        const { title: source, real, items } = randomElement(feeds);
+        const { title: source, isReal, items } = randomElement(feeds);
         const { title, content, link } = randomElement(items);
         return {
             source,
-            real,
+            isReal,
             title,
             content,
             link
         };
-    } catch {
-        return randomArticle(feeds);
+    } catch (error) {
+        console.error('Failed to get random article: ', error)
     }
 };
 
@@ -70,13 +70,11 @@ const Home = ({
             ...(await Promise.all(
                 feedMetadata.map(async meta => {
                     try {
-                        const feed = await parser.parseURL(
-                            `${CORS_PROXY}${meta.link}`
-                        );
+                        const feed = await parser.parseURL(CORS_PROXY + meta.link);
                         return { ...feed, ...meta };
                     } catch (error) {
                         console.error(error);
-                        return [];
+                        return {};
                     }
                 })
             ))
@@ -84,12 +82,12 @@ const Home = ({
     };
 
     const handlePlay = isReal => {
-        setScore(article.real === isReal ? score + 1 : Math.max(score - 1, 0));
+        setScore(article.isReal === isReal ? score + 1 : Math.max(score - 1, 0));
         setRealPlay(isReal);
         setShowResult(true);
     };
 
-    const handlePlayParent = () => isReal => handlePlay(isReal);
+    const handlePlayParent = () => handlePlay;
 
     const handleNextArticle = advanceRound => {
         if (advanceRound) setRound(round + 1);
@@ -111,11 +109,11 @@ const Home = ({
     }, [feeds, article, playHandler, newGameHandler]);
 
     return (
-        <Container className="py-5">
+        <Container className="py-5" role="main">
             <Helmet title="FAKE NOOZ" />
             <h3 className="text-center mb-5">Is it real or fake?</h3>
             <Row>
-                <Col sm={{ span: 8, offset: 2 }} md={{ span: 6, offset: 3 }}>
+                <Col sm={{ span: 8, offset: 2 }} md={{ span: 6, offset: 3 }} aria-live="polite">
                     {article ? (
                         <Game
                             article={article}

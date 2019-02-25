@@ -11,7 +11,7 @@ import {
 } from '@fortawesome/pro-solid-svg-icons';
 
 const Result = ({
-    article: { source, real, title, link },
+    article: { source, isReal, title, link },
     win,
     handleNextArticle
 }) => {
@@ -25,10 +25,10 @@ const Result = ({
                     </Card.Title>
                     <h5>
                         <FontAwesomeIcon
-                            icon={real ? faCheckCircle : faTimesCircle}
+                            icon={isReal ? faCheckCircle : faTimesCircle}
                             className="mr-2"
                         />
-                        {real ? 'Real News' : 'Fake News'}
+                        {isReal ? 'Real News' : 'Fake News'}
                     </h5>
                     <h6>{source}</h6>
                     <a

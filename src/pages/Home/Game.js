@@ -11,7 +11,7 @@ const Game = ({
     handleRealButton,
     handleFakeButton
 }) => {
-    const win = article && article.real === realPlay;
+    const win = article && article.isReal === realPlay;
     return showResult ? (
         <Result
             article={article}
