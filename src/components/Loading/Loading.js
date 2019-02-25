@@ -1,5 +1,6 @@
 import React from 'react';
 import { bool, shape, string } from 'prop-types';
+import classNames from 'classnames';
 import { Container, Row, Col, Alert, Media } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinnerThird } from '@fortawesome/pro-light-svg-icons';
@@ -8,19 +9,20 @@ import styles from './Loading.module.scss';
 
 const Loading = ({ isLoading, pastDelay, error }) =>
     (isLoading && pastDelay) || error ? (
-        <Container className="py-5 text-center text-primary">
+        <Container className={classNames('py-5', 'text-primary')}>
             <Row className="py-5">
-                <Col md={{ size: 6, offset: 3 }} className="py-md-5">
-                    {isLoading && pastDelay && (
-                        <FontAwesomeIcon
-                            icon={faSpinnerThird}
-                            size="3x"
-                            spin
-                            className="my-5"
-                        />
-                    )}
+                <Col md={{ span: 6, offset: 3 }} className="py-md-t">
+                    <div className="text-center">
+                        {isLoading && pastDelay && (
+                            <FontAwesomeIcon
+                                icon={faSpinnerThird}
+                                size="3x"
+                                spin
+                            />
+                        )}
+                    </div>
                     {error && (
-                        <Alert variant="danger" className="m-0 text-left">
+                        <Alert variant="danger" className="m-0">
                             <Media>
                                 <Media className="mr-3">
                                     <FontAwesomeIcon
@@ -44,9 +46,13 @@ const Loading = ({ isLoading, pastDelay, error }) =>
                                             this page. Please{' '}
                                             <button
                                                 type="button"
-                                                className={`${
-                                                    styles.refreshBtn
-                                                } alert-link p-0 bg-transparent border-0`}
+                                                className={classNames(
+                                                    styles.refreshBtn,
+                                                    'alert-link',
+                                                    'p-0',
+                                                    'bg-transparent',
+                                                    'border-0'
+                                                )}
                                                 onClick={() =>
                                                     window.location.reload()
                                                 }

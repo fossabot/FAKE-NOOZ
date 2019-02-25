@@ -6,7 +6,12 @@ import styles from './Footer.module.scss';
 const Footer = () => (
     <Jumbotron
         fluid
-        className={classNames('mb-0', 'bg-light', 'text-center', 'text-muted')}
+        className={classNames(
+            'mb-0',
+            'bg-transparent',
+            'text-center',
+            'text-muted'
+        )}
     >
         <Container>
             &copy; {new Date().getFullYear()} Grant Burry & Vamshi Arugonda
