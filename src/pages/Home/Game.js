@@ -31,6 +31,11 @@ const Game = ({
                             __html: article.content
                                 .replace(/<img[^>]*>/g, '')
                                 .replace(/<a[^>]*>.*<\/a>/g, '')
+                                .replace(/\n.*/g, '')
+                                .replace(
+                                    /\s*makeamericathebest.com Your Trusted Source for Faux News\./g,
+                                    ''
+                                )
                         }}
                     />
                 </Card.Body>
