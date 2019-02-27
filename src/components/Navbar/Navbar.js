@@ -6,6 +6,7 @@ import { Container, Navbar, Nav } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPowerOff, faQuestionCircle } from '@fortawesome/pro-solid-svg-icons';
 import { About } from '../../pages';
+import { ReactComponent as Logo } from './logo.svg';
 import styles from './Navbar.module.scss';
 
 const linkClass = classNames(
@@ -42,11 +43,18 @@ const CustomNavbar = ({ round, score, handleNewGame }) => {
                         'justify-content-between'
                     )}
                 >
-                    <Navbar.Brand as={Link} to="/">
+                    <Navbar.Brand
+                        as={Link}
+                        to="/"
+                        className={classNames('d-flex', 'align-items-center')}
+                    >
+                        <Logo height={40} />
                         <h4
                             className={classNames(
+                                'd-none',
+                                'd-md-block',
                                 'mb-0',
-                                'ml-2',
+                                'ml-3',
                                 'text-primary',
                                 'font-weight-bold'
                             )}
