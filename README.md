@@ -1,6 +1,19 @@
 # FAKE NOOZ
 
-#### CSCI 4849: Project 1
+<h1 align="center">
+    <img src="https://github.com/Burry/FAKE-NOOZ/blob/master/public/android-chrome-512x512.png?raw=true" width="170px" alt="Icon" />
+    <br />
+    FAKE NOOZ
+</h1>
+
+<h4 align="center">
+    CSCI 4849: Project 1
+    <br />
+    <br />
+    <a href="https://travis-ci.com/Burry/CSCI-4849-Project-1" target="_blank" title="Build Status">
+        <img src="https://travis-ci.com/Burry/CSCI-4849-Project-1.svg?branch=master" alt="Build Status" />
+    </a>
+</h4>
 
 FAKE NOOZ is a simple game to test how well you can determine what is real news apart from fake news. We're not really talking about fake news here—content which is designed to deceive you—instead our fake news sources are parody/satire sites that don't hesitate to acknowledge their work as comedy. Here are all the news and parody RSS feeds we use for FAKE NOOZ:
 
