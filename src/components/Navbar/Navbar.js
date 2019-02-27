@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { NavLink as Link } from 'react-router-dom';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPowerOff, faQuestionCircle } from '@fortawesome/pro-solid-svg-icons';
+import { faPlusCircle, faQuestionCircle } from '@fortawesome/pro-solid-svg-icons';
 import { About } from '../../pages';
 import { ReactComponent as Logo } from './logo.svg';
 import styles from './Navbar.module.scss';
@@ -113,7 +113,7 @@ const CustomNavbar = ({
                                 onClick={handleNewGame}
                             >
                                 <FontAwesomeIcon
-                                    icon={faPowerOff}
+                                    icon={faPlusCircle}
                                     fixedWidth
                                     className={iconClass}
                                 />
