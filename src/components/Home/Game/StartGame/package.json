@@ -1,0 +1,6 @@
+{
+    "name": "StartGame",
+    "version": "0.0.0",
+    "private": true,
+    "main": "./StartGame.js"
+}

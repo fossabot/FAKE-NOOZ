@@ -3,7 +3,7 @@ import { shape, oneOfType, string, number, func, bool } from 'prop-types';
 import Helmet from 'react-helmet';
 import { Container, Row, Col } from 'react-bootstrap';
 import Parser from 'rss-parser';
-import Loading from '../../components/Loading';
+import Loading from '../Loading';
 import Game from './Game';
 import feedMetadata from '../../feedMetadata';
 

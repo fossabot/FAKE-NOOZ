@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { HotKeys } from 'react-hotkeys';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Home, NotFound } from '../../pages';
 import Navbar from '../Navbar';
+import Home from '../Home';
+import NotFound from '../NotFound';
 import Footer from '../Footer';
 import './App.scss';
 

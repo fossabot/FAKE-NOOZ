@@ -4,8 +4,11 @@ import classNames from 'classnames';
 import { NavLink as Link } from 'react-router-dom';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle, faQuestionCircle } from '@fortawesome/pro-solid-svg-icons';
-import { About } from '../../pages';
+import {
+    faPlusCircle,
+    faQuestionCircle
+} from '@fortawesome/pro-solid-svg-icons';
+import About from '../About';
 import { ReactComponent as Logo } from './logo.svg';
 import styles from './Navbar.module.scss';
 

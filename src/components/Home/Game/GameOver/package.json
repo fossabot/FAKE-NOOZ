@@ -1,0 +1,6 @@
+{
+    "name": "GameOver",
+    "version": "0.0.0",
+    "private": true,
+    "main": "./GameOver.js"
+}

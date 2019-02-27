@@ -12,13 +12,14 @@ const Round = ({
 }) => {
     const formattedArticle = content
         .replace(/^\s+/g, '') // Remove lead space
+        .replace(/^(?:&nbsp;)+/g, '') // Remove lead space
         .replace(/<img[^>]*>/g, '') // Remove images
         .replace(/<a[^>]*>.*<\/a>/g, '') // Remove links
         .replace(/<\/?p[^>]*>/g, '') // Remove paragraphs
         .replace(/<table[^>]*>.*<\/table>/g, '') // Remove tables (Reddit)
         .replace(/submitted by.*/g, '') // Remove submitted by (Reddit)
         .replace(/<br.*/g, '') // Remove line breaks and following content
-        .replace(/ The post \./g, '') // Remove "The post ."
+        .replace(/The post \.\n/g, '') // Remove "The post ."
         .replace(/^.$/g, '') // Remove period
         .replace(
             /\s*makeamericathebest.com Your Trusted Source for Faux News\./g,
