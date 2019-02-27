@@ -22,7 +22,8 @@ const Result = ({
                 className={classNames(
                     'text-center',
                     `text-${resultVariant}`,
-                    'mb-5'
+                    'mb-4',
+                    'mb-md-5'
                 )}
             >
                 {win ? 'Correct!' : 'Incorrect'}

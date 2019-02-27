@@ -41,7 +41,6 @@ const StartGame = ({
                         <Col xs={4} sm={3} lg={2}>
                             <Form.Control
                                 as="select"
-                                name="rounds"
                                 value={gameRounds}
                                 onChange={handleRoundSetting}
                             >
@@ -50,7 +49,9 @@ const StartGame = ({
                                         {option}
                                     </option>
                                 ))}
-                                <option>{articleCount}</option>
+                                <option value={articleCount}>
+                                    {articleCount} (Max)
+                                </option>
                             </Form.Control>
                         </Col>
                     </Form.Group>

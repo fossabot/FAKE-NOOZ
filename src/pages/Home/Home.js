@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { shape, number, func, bool } from 'prop-types';
+import { shape, oneOfType, string, number, func, bool } from 'prop-types';
 import Helmet from 'react-helmet';
 import { Container, Row, Col } from 'react-bootstrap';
 import Parser from 'rss-parser';
@@ -129,7 +129,6 @@ const Home = ({
                     sm={{ span: 10, offset: 1 }}
                     lg={{ span: 8, offset: 2 }}
                     xl={{ span: 6, offset: 3 }}
-                    aria-live="polite"
                 >
                     {loading ? (
                         <Loading isLoading pastDelay />
@@ -156,7 +155,7 @@ const Home = ({
 Home.propTypes = {
     stats: shape({
         round: number.isRequired,
-        gameRounds: number.isRequired,
+        gameRounds: oneOfType([string, number]).isRequired,
         score: number.isRequired,
         loading: bool.isRequired
     }).isRequired,

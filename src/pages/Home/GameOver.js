@@ -1,5 +1,5 @@
 import React from 'react';
-import { shape, number, string, func } from 'prop-types';
+import { shape, oneOfType, number, string, func } from 'prop-types';
 import classNames from 'classnames';
 import { Card, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -27,7 +27,9 @@ const GameOver = ({
 
     return (
         <>
-            <h3 className={classNames('text-center', 'mb-5')}>Game Over</h3>
+            <h3 className={classNames('text-center', 'mb-4', 'mb-md-5')}>
+                Game Over
+            </h3>
             <Card
                 bg={resultVariant}
                 border={resultVariant}
@@ -82,7 +84,7 @@ const GameOver = ({
 
 GameOver.propTypes = {
     stats: shape({
-        gameRounds: string.isRequired,
+        gameRounds: oneOfType([string, number]).isRequired,
         score: number.isRequired,
         accuracy: string.isRequired
     }).isRequired,

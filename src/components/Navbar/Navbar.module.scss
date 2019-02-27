@@ -5,20 +5,38 @@
 }
 
 .link {
-    color: $secondary;
+    width: max-content;
     font-size: 0.75rem;
     padding-top: 0.75rem;
 }
 
-.gameInfo {
+.gameInfoContainer {
     position: absolute;
-    width: 250px;
+    width: 280px;
     left: 50%;
-    margin-left: -125px;
+    margin-left: -140px;
 }
 
 .icon {
     font-size: 1.25rem;
+}
+
+@include media-breakpoint-down(md) {
+    .gameInfoContainer {
+        width: auto;
+        position: initial;
+        margin-left: 0;
+    }
+
+    .gameInfo {
+        font-size: 1rem;
+    }
+}
+
+@include media-breakpoint-down(xs) {
+    .gameInfo {
+        text-align: left;
+    }
 }
 
 @supports (backdrop-filter: blur(15px)) {

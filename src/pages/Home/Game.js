@@ -60,7 +60,7 @@ const Game = ({
     }
 
     return (
-        <div className="py-5">
+        <div className="py-4 py-md-5" aria-live="polite">
             <Stage />
         </div>
     );

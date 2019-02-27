@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { shape, number, string, func, bool } from 'prop-types';
+import { shape, oneOfType, number, string, func, bool } from 'prop-types';
 import classNames from 'classnames';
 import { NavLink as Link } from 'react-router-dom';
 import { Container, Navbar, Nav } from 'react-bootstrap';
@@ -12,16 +12,33 @@ import styles from './Navbar.module.scss';
 const linkClass = classNames(
     styles.link,
     'd-flex',
-    'd-lg-block',
+    'd-sm-block',
+    'text-center',
     'align-items-center'
 );
 const iconClass = classNames(
     styles.icon,
     'mr-2',
-    'mx-lg-auto',
-    'mb-lg-1',
-    'd-lg-block'
+    'mx-sm-auto',
+    'mb-sm-1',
+    'd-sm-block'
 );
+
+const GameInfo = ({ label, value }) => (
+    <h5 className={classNames(styles.gameInfo, 'mx-sm-3', 'mb-0')}>
+        <div
+            className={classNames('d-inline', 'd-sm-block', 'mr-2', 'mr-sm-0')}
+        >
+            {label}
+        </div>
+        <small>{value}</small>
+    </h5>
+);
+
+GameInfo.propTypes = {
+    label: string.isRequired,
+    value: oneOfType(string, number).isRequired
+};
 
 const CustomNavbar = ({
     stats: { stage, round, gameRounds, score, accuracy, loading },
@@ -36,7 +53,7 @@ const CustomNavbar = ({
                 collapseOnSelect
                 variant="dark"
                 bg="transparent"
-                expand="lg"
+                expand="sm"
                 className={styles.root}
             >
                 <Container
@@ -49,7 +66,11 @@ const CustomNavbar = ({
                     <Navbar.Brand
                         as={Link}
                         to="/"
-                        className={classNames('d-flex', 'align-items-center')}
+                        className={classNames(
+                            'mr-0',
+                            'd-flex',
+                            'align-items-center'
+                        )}
                     >
                         <Logo height={40} />
                         <h4
@@ -68,47 +89,21 @@ const CustomNavbar = ({
                     {!loading && !/.+-game/g.test(stage) && (
                         <div
                             className={classNames(
-                                styles.gameInfo,
+                                styles.gameInfoContainer,
                                 'text-center',
-                                'd-flex',
+                                'd-sm-flex',
                                 'align-items-center',
                                 'justify-content-center'
                             )}
+                            aria-live="polite"
+                            aria-label="Game Info"
                         >
-                            <h5
-                                className={classNames('d-inline', 'd-md-block')}
-                            >
-                                Round
-                                <br
-                                    className={classNames(
-                                        'd-none',
-                                        'd-md-block'
-                                    )}
-                                />
-                                <small>
-                                    {round} / {gameRounds}
-                                </small>
-                            </h5>
-                            <h5 className="mx-2 mx-md-3">
-                                Score
-                                <br
-                                    className={classNames(
-                                        'd-none',
-                                        'd-md-block'
-                                    )}
-                                />
-                                <small>{score}</small>
-                            </h5>
-                            <h5>
-                                Accuracy
-                                <br
-                                    className={classNames(
-                                        'd-none',
-                                        'd-md-block'
-                                    )}
-                                />
-                                <small>{accuracy}</small>
-                            </h5>
+                            <GameInfo
+                                label="Round"
+                                value={`${round} / ${gameRounds}`}
+                            />
+                            <GameInfo label="Score" value={score} />
+                            <GameInfo label="Accuracy" value={accuracy} />
                         </div>
                     )}
                     <Nav role="navigation">
@@ -148,7 +143,7 @@ CustomNavbar.propTypes = {
     stats: shape({
         stage: string.isRequired,
         round: number.isRequired,
-        gameRounds: number.isRequired,
+        gameRounds: oneOfType([string, number]).isRequired,
         score: number.isRequired,
         accuracy: string.isRequired,
         loading: bool.isRequired

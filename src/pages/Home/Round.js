@@ -23,7 +23,7 @@ const Round = ({
         ); // Remove "Make America The Best" tagline
     return (
         <>
-            <h3 className={classNames('text-center', 'mb-5')}>
+            <h3 className={classNames('text-center', 'mb-4', 'mb-md-5')}>
                 Is it real or fake?
             </h3>
             <Card>
