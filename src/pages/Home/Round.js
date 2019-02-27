@@ -11,6 +11,7 @@ const Round = ({
     handleFakeButton
 }) => {
     const formattedArticle = content
+        .replace(/^\s+/g, '') // Remove lead space
         .replace(/<img[^>]*>/g, '') // Remove images
         .replace(/<a[^>]*>.*<\/a>/g, '') // Remove links
         .replace(/<\/?p[^>]*>/g, '') // Remove paragraphs
@@ -18,6 +19,7 @@ const Round = ({
         .replace(/submitted by.*/g, '') // Remove submitted by (Reddit)
         .replace(/<br.*/g, '') // Remove line breaks and following content
         .replace(/ The post \./g, '') // Remove "The post ."
+        .replace(/^.$/g, '') // Remove period
         .replace(
             /\s*makeamericathebest.com Your Trusted Source for Faux News\./g,
             ''
@@ -30,14 +32,12 @@ const Round = ({
             <Card>
                 <Card.Body>
                     <Card.Title aria-label="Article title">{title}</Card.Title>
-                    {formattedArticle && formattedArticle !== '' ? (
+                    {formattedArticle && formattedArticle !== '' && (
                         <article /* eslint-disable react/no-danger */
                             dangerouslySetInnerHTML={{
                                 __html: formattedArticle
                             }}
                         />
-                    ) : (
-                        <span className="text-muted">No feed content</span>
                     )}
                 </Card.Body>
             </Card>
