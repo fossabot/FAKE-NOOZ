@@ -1,9 +1,11 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerQuestion } from '@fortawesome/pro-solid-svg-icons';
+import styles from './NotFound.module.scss';
 
 const NotFound = () => (
     <Container className="py-5 text-center">
@@ -18,14 +20,20 @@ const NotFound = () => (
                 <FontAwesomeIcon
                     icon={faMapMarkerQuestion}
                     size="5x"
-                    className="mb-4 text-muted"
+                    className={classNames('mb-4', 'text-muted')}
                 />
-                <h1>Oops!</h1>
-                <p className="lead mb-4">
-                    Looks like this page doesn&apos;t exist.
-                </p>
-                <Button as={Link} to="/" variant="primary" type={null}>
-                    Go Home
+                <h1>
+                    404: <b>FAKE PAGE</b>
+                </h1>
+                <p className="mb-4">Looks like this page doesn&apos;t exist.</p>
+                <Button
+                    as={Link}
+                    to="/"
+                    variant="light"
+                    type={null}
+                    className={styles.link}
+                >
+                    Back to Game
                 </Button>
             </Col>
         </Row>

@@ -23,7 +23,7 @@ const randomArticle = feeds => {
     }
 };
 
-const Home = ({
+const Main = ({
     stats,
     setScore,
     setRound,
@@ -166,7 +166,7 @@ const Home = ({
     );
 };
 
-Home.propTypes = {
+Main.propTypes = {
     stats: shape({
         round: number.isRequired,
         gameRounds: oneOfType([string, number]).isRequired,
@@ -184,9 +184,9 @@ Home.propTypes = {
     setHandleNewGame: func.isRequired
 };
 
-Home.defaultProps = {
+Main.defaultProps = {
     keyHandlers: undefined,
     newGameHandler: undefined
 };
 
-export default Home;
+export default Main;

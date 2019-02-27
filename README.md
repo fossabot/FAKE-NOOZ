@@ -21,7 +21,7 @@ FAKE NOOZ is a simple game to test how well you can determine what is real news 
 | NPR News                | Real | [🌐](https://www.npr.org/sections/news)    | [📰](https://www.npr.org/rss/rss.php?id=1001)|
 | Reddit » /r/nottheonion | Real | [🌐](https://www.reddit.com/r/nottheonion) | [📰](https://www.reddit.com/r/nottheonion/.rss)|
 
-We make no claims on and take no responsibility for the content of these RSS feeds which are the property of their respective owners. FAKE NOOZ is created by [Grant Burry](https://github.com/Burry) and [Vamshi Arugonda](https://github.com/varugonda) © 2019.
+We make no claims on and take no responsibility for the contents of these RSS feeds which are the property of their respective owners. FAKE NOOZ is created by [Grant Burry](https://github.com/Burry) and [Vamshi Arugonda](https://github.com/varugonda) © 2019.
 
 ---
 

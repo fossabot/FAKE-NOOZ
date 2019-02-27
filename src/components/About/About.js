@@ -105,7 +105,7 @@ const About = ({ show, onHide }) => (
                 </tbody>
             </Table>
             <p>
-                We make no claims on and take no responsibility for the content
+                We make no claims on and take no responsibility for the contents
                 of these RSS feeds which are the property of their respective
                 owners. <b>FAKE NOOZ</b> is created by{' '}
                 <a
