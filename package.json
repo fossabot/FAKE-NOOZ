@@ -3,10 +3,10 @@
     "version": "0.0.1",
     "license": "MIT",
     "private": true,
-    "homepage": "https://csci-4849-project-1.grantburry.com",
+    "homepage": "https://fakenooz.grantburry.com",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Burry/CSCI-4849-Project-1.git"
+        "url": "https://github.com/Burry/FAKE-NOOZ.git"
     },
     "contributors": [
         "Grant Burry <grant@burry.me> (https://grantburry.com)",
