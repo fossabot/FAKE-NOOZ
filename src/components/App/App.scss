@@ -4,7 +4,22 @@
 @import '../../variables';
 
 // Import Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/alert';
+@import '~bootstrap/scss/buttons';
+@import '~bootstrap/scss/card';
+@import '~bootstrap/scss/close';
+@import '~bootstrap/scss/forms';
+@import '~bootstrap/scss/grid';
+@import '~bootstrap/scss/media';
+@import '~bootstrap/scss/modal';
+@import '~bootstrap/scss/nav';
+@import '~bootstrap/scss/navbar';
+@import '~bootstrap/scss/print';
+@import '~bootstrap/scss/reboot';
+@import '~bootstrap/scss/tables';
+@import '~bootstrap/scss/transitions';
+@import '~bootstrap/scss/type';
+@import '~bootstrap/scss/utilities';
 
 // Text selection
 ::-moz-selection {
@@ -33,10 +48,4 @@ noscript {
     [class*='fa-'] {
         vertical-align: -0.2rem;
     }
-}
-
-// Code blocks
-pre {
-    white-space: pre-wrap;
-    word-wrap: break-word;
 }

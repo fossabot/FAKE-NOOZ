@@ -14,6 +14,7 @@ import styles from './Navbar.module.scss';
 
 const linkClass = classNames(
     styles.link,
+    styles.navLink,
     'd-flex',
     'd-sm-block',
     'text-center',
@@ -70,6 +71,7 @@ const CustomNavbar = ({
                         as={Link}
                         to="/"
                         className={classNames(
+                            styles.link,
                             'mr-0',
                             'd-flex',
                             'align-items-center'

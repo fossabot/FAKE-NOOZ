@@ -1,28 +1,18 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Jumbotron, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import styles from './Footer.module.scss';
 
 const Footer = () => (
-    <Jumbotron
-        fluid
-        className={classNames(
-            'mb-0',
-            'bg-transparent',
-            'text-center',
-            'text-muted'
+    <Container className={classNames('py-5', 'text-center', 'text-muted')}>
+        &copy; {new Date().getFullYear()} Grant Burry & Vamshi Arugonda
+        <span className={classNames(styles.spacer, 'mx-2')}>&middot;</span>
+        {process.env.NODE_ENV === 'development' ? (
+            <span className="text-primary">Development Mode</span>
+        ) : (
+            'All rights reserved'
         )}
-    >
-        <Container>
-            &copy; {new Date().getFullYear()} Grant Burry & Vamshi Arugonda
-            <span className={classNames(styles.spacer, 'mx-2')}>&middot;</span>
-            {process.env.NODE_ENV === 'development' ? (
-                <span className="text-primary">Development Mode</span>
-            ) : (
-                'All rights reserved'
-            )}
-        </Container>
-    </Jumbotron>
+    </Container>
 );
 
 export default Footer;
