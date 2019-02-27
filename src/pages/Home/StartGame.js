@@ -9,11 +9,11 @@ const StartGame = ({
     handleStartGame,
     handleRoundSetting
 }) => {
-    const roundOptions = [10];
     const articleCount = feeds.reduce(
         (count, feed) => count + feed.items.length,
         0
     );
+    const roundOptions = articleCount > 10 ? [10] : [];
     for (let i = 25; i <= articleCount; i *= 2) roundOptions.push(i);
     return (
         <Form onSubmit={handleStartGame}>
