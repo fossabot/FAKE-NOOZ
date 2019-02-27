@@ -8,8 +8,8 @@ self.__precacheManifest = [
     "url": "https://fakenooz.grantburry.com/static/js/main.f62d8a54.chunk.js"
   },
   {
-    "revision": "bc9c123979e4f026c721",
-    "url": "https://fakenooz.grantburry.com/static/js/runtime~main.bc9c1239.js"
+    "revision": "e5fa8f05839c8bc430ca",
+    "url": "https://fakenooz.grantburry.com/static/js/runtime~main.e5fa8f05.js"
   },
   {
     "revision": "a087570dccddf6ed28e0",
@@ -20,8 +20,8 @@ self.__precacheManifest = [
     "url": "https://fakenooz.grantburry.com/static/js/3.cd29abc8.chunk.js"
   },
   {
-    "revision": "83fc1ba6c43d30479c8b",
-    "url": "https://fakenooz.grantburry.com/static/js/4.83fc1ba6.chunk.js"
+    "revision": "1abf87aa4d821f009852",
+    "url": "https://fakenooz.grantburry.com/static/js/4.1abf87aa.chunk.js"
   },
   {
     "revision": "66f255a5207aae8c395e",
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "https://fakenooz.grantburry.com/static/media/logo.9117dc7c.svg"
   },
   {
-    "revision": "09848929c1230f16be36c65521fdb017",
+    "revision": "1ca00d9bd9c33a806989309ed959dcb8",
     "url": "https://fakenooz.grantburry.com/index.html"
   }
 ];
