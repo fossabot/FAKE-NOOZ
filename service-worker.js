@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "https://fakenooz.grantburry.com/precache-manifest.51f4b30488c6ec1e21d7c9d51cda4694.js"
+  "https://fakenooz.grantburry.com/precache-manifest.bbbe25fe1d19ad486555d49ef5c55248.js"
 );
 
 workbox.clientsClaim();
