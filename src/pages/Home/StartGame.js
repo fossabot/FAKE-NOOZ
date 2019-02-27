@@ -42,7 +42,7 @@ const StartGame = ({
                             <Form.Control
                                 as="select"
                                 name="rounds"
-                                //value={gameRounds}
+                                value={gameRounds}
                                 onChange={handleRoundSetting}
                             >
                                 {roundOptions.map(option => (
