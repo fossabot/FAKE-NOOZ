@@ -148,16 +148,18 @@ const Main = ({
                         <Loading isLoading pastDelay />
                     ) : (
                         <Game
-                            stats={stats}
-                            feeds={feeds}
-                            article={article}
-                            realPlay={realPlay}
-                            handleStartGame={handleStartGame}
-                            handleRoundSetting={handleRoundSetting}
-                            handleNextRound={handleNextRound}
+                            {...{
+                                stats,
+                                feeds,
+                                article,
+                                realPlay,
+                                handleStartGame,
+                                handleRoundSetting,
+                                handleNextRound,
+                                handleNewGame
+                            }}
                             handleRealButton={() => handlePlay(true)}
                             handleFakeButton={() => handlePlay(false)}
-                            handleNewGame={handleNewGame}
                         />
                     )}
                 </Col>

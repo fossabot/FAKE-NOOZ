@@ -42,17 +42,19 @@ const App = () => {
                         path="/"
                         render={props => (
                             <Main
-                                stats={stats}
-                                setScore={setScore}
-                                setRound={setRound}
-                                setGameRounds={setGameRounds}
-                                setLoading={setLoading}
-                                setStage={setStage}
-                                keyHandlers={keyHandlers}
+                                {...{
+                                    stats,
+                                    setScore,
+                                    setRound,
+                                    setGameRounds,
+                                    setLoading,
+                                    setStage,
+                                    keyHandlers,
+                                    setKeyHandlers,
+                                    setHandleNewGame,
+                                    ...props
+                                }}
                                 newGameHandler={handleNewGame}
-                                setKeyHandlers={setKeyHandlers}
-                                setHandleNewGame={setHandleNewGame}
-                                {...props}
                             />
                         )}
                     />

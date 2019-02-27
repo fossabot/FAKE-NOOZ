@@ -1,15 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { func, shape } from 'prop-types';
 import classNames from 'classnames';
+import { isMobile } from 'react-device-detect';
+import Swipe from 'react-easy-swipe';
 import { Card, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimesCircle } from '@fortawesome/pro-solid-svg-icons';
+import styles from './Round.module.scss';
+
+const browserWidth = () =>
+    Math.max(
+        document.body.scrollWidth,
+        document.documentElement.scrollWidth,
+        document.body.offsetWidth,
+        document.documentElement.offsetWidth,
+        document.documentElement.clientWidth
+    );
 
 const Round = ({
     article: { title, content },
     handleRealButton,
     handleFakeButton
 }) => {
+    const [cardXOffset, setCardXOffset] = useState(0);
+
+    const onSwipeStart = () => {
+        // console.info('Start swiping...');
+    };
+
+    const onSwipeMove = ({ x }) => {
+        setCardXOffset(cardXOffset + x);
+    };
+
+    const onSwipeEnd = () => {
+        const halfBrowserWidth = browserWidth() / 2;
+        if (cardXOffset < -halfBrowserWidth) handleRealButton();
+        if (cardXOffset > halfBrowserWidth) handleFakeButton();
+    };
+
     const formattedArticle = content
         .replace(/^\s+/g, '') // Remove lead space
         .replace(/^(?:&nbsp;)+/g, '') // Remove lead space
@@ -26,28 +54,39 @@ const Round = ({
             ''
         ); // Remove "Make America The Best" tagline
     const articleContentExists = formattedArticle && formattedArticle !== '';
+
     return (
-        <>
+        <div className={styles.roundContainer}>
             <h3 className={classNames('text-center', 'mb-4', 'mb-md-5')}>
                 Is it real or fake?
             </h3>
-            <Card>
-                <Card.Body>
-                    <Card.Title
-                        aria-label="Article title"
-                        className={classNames(!articleContentExists && 'mb-0')}
-                    >
-                        {title}
-                    </Card.Title>
-                    {articleContentExists && (
-                        <article /* eslint-disable react/no-danger */
-                            dangerouslySetInnerHTML={{
-                                __html: formattedArticle
-                            }}
-                        />
-                    )}
-                </Card.Body>
-            </Card>
+            <Swipe
+                {...isMobile && {
+                    onSwipeStart,
+                    onSwipeMove,
+                    onSwipeEnd
+                }}
+            >
+                <Card style={{ left: cardXOffset }}>
+                    <Card.Body>
+                        <Card.Title
+                            aria-label="Article title"
+                            className={classNames(
+                                !articleContentExists && 'mb-0'
+                            )}
+                        >
+                            {title}
+                        </Card.Title>
+                        {articleContentExists && (
+                            <article /* eslint-disable react/no-danger */
+                                dangerouslySetInnerHTML={{
+                                    __html: formattedArticle
+                                }}
+                            />
+                        )}
+                    </Card.Body>
+                </Card>
+            </Swipe>
             <div
                 className={classNames(
                     'd-flex',
@@ -77,7 +116,7 @@ const Round = ({
                     Fake
                 </Button>
             </div>
-        </>
+        </div>
     );
 };
 
