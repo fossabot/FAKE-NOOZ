@@ -1,5 +1,6 @@
 import React from 'react';
 import { string, bool, func } from 'prop-types';
+import Helmet from 'react-helmet';
 import classNames from 'classnames';
 import { Modal, Table, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -36,6 +37,7 @@ SourceLink.propTypes = {
 
 const About = ({ show, onHide }) => (
     <Modal size="lg" aria-labelledby="about-title" show={show} onHide={onHide}>
+        <Helmet defaultTitle="FAKE NOOZ » About" />
         <Modal.Header closeButton>
             <Modal.Title id="about-title">
                 <FontAwesomeIcon

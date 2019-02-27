@@ -17,13 +17,7 @@ const randomArticle = feeds => {
     try {
         const { source, isReal, items } = randomElement(feeds);
         const { title, content, link } = randomElement(items);
-        return {
-            source,
-            isReal,
-            title,
-            content,
-            link
-        };
+        return { source, isReal, title, content, link };
     } catch (error) {
         return null;
     }
