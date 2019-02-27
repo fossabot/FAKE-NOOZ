@@ -8,8 +8,8 @@
     CSCI 4849: Project 1
     <br />
     <br />
-    <a href="https://travis-ci.com/Burry/FAKE-NOOZ" target="_blank" title="Build Status">
-        <img src="https://travis-ci.com/Burry/FAKE-NOOZ.svg?branch=master" alt="Build Status" />
+    <a href="https://travis-ci.com/Burry/CSCI-4849-Project-1" target="_blank" title="Build Status">
+        <img src="https://travis-ci.com/Burry/CSCI-4849-Project-1.svg?branch=master" alt="Build Status" />
     </a>
 </h4>
 
