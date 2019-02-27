@@ -30,15 +30,15 @@ const Home = ({
     setGameRounds,
     setLoading,
     setStage,
-    playHandler,
+    keyHandlers,
     newGameHandler,
-    setHandlePlay,
+    setKeyHandlers,
     setHandleNewGame
 }) => {
     const [feeds, setFeeds] = useState([]);
     const [article, setArticle] = useState();
     const [realPlay, setRealPlay] = useState();
-    const { round, gameRounds, score, loading } = stats;
+    const { stage, round, gameRounds, score, loading } = stats;
 
     const fetchFeeds = async clear => {
         setFeeds([
@@ -67,10 +67,8 @@ const Home = ({
         setStage('result');
     };
 
-    const handlePlayParent = () => handlePlay;
-
     const handleStartGame = event => {
-        event.preventDefault();
+        if (event) event.preventDefault();
         setStage('round');
     };
 
@@ -107,13 +105,35 @@ const Home = ({
 
     const handleNewGameParent = () => handleNewGame;
 
+    const handleKeys = {
+        n: () => {
+            console.info('Next!');
+            if (!loading)
+                switch (stage) {
+                    case 'result':
+                        handleNextRound(true);
+                        break;
+                    case 'start-game':
+                        handleStartGame();
+                        break;
+                    case 'end-game':
+                        handleNewGame();
+                        break;
+                    default:
+                        break;
+                }
+        },
+        r: () => stage === 'round' && handlePlay(true),
+        f: () => stage === 'round' && handlePlay(false)
+    };
+
     useEffect(() => {
         if (!feeds.length) fetchFeeds();
         else if (!article) setArticle(randomArticle(feeds));
         else setLoading(false);
-        if (!playHandler) setHandlePlay(handlePlayParent);
+        if (!keyHandlers) setKeyHandlers(handleKeys);
         if (!newGameHandler) setHandleNewGame(handleNewGameParent);
-    }, [feeds, article, playHandler, newGameHandler]);
+    }, [feeds, article, keyHandlers, newGameHandler]);
 
     return (
         <Container role="main">
@@ -158,14 +178,14 @@ Home.propTypes = {
     setGameRounds: func.isRequired,
     setLoading: func.isRequired,
     setStage: func.isRequired,
-    playHandler: func,
+    keyHandlers: shape({}),
     newGameHandler: func,
-    setHandlePlay: func.isRequired,
+    setKeyHandlers: func.isRequired,
     setHandleNewGame: func.isRequired
 };
 
 Home.defaultProps = {
-    playHandler: undefined,
+    keyHandlers: undefined,
     newGameHandler: undefined
 };
 

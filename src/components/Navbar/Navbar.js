@@ -41,7 +41,7 @@ const GameInfo = ({ label, value }) => (
 
 GameInfo.propTypes = {
     label: string.isRequired,
-    value: oneOfType(string, number).isRequired
+    value: oneOfType([string, number]).isRequired
 };
 
 const CustomNavbar = ({
