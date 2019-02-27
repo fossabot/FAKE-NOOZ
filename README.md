@@ -16,7 +16,7 @@ FAKE NOOZ is a simple game to test how well you can determine what is real news 
 
 We make no claims on and take no responsibility for the content of these RSS feeds which are the property of their respective owners. FAKE NOOZ is created by [Grant Burry](https://github.com/Burry) and [Vamshi Arugonda](https://github.com/varugonda) © 2019.
 
-===
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
