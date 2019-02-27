@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "0a2216d0fbb2a4707f5a",
+    "revision": "c6d79886ff1d099e70b0",
     "url": "https://fakenooz.grantburry.com/static/css/main.5829dcd4.chunk.css"
   },
   {
-    "revision": "0a2216d0fbb2a4707f5a",
-    "url": "https://fakenooz.grantburry.com/static/js/main.0a2216d0.chunk.js"
+    "revision": "c6d79886ff1d099e70b0",
+    "url": "https://fakenooz.grantburry.com/static/js/main.c6d79886.chunk.js"
   },
   {
     "revision": "d4499ee2fefa46571faf",
@@ -28,7 +28,11 @@ self.__precacheManifest = [
     "url": "https://fakenooz.grantburry.com/static/js/5.147fc9be.chunk.js"
   },
   {
-    "revision": "dd12969c49747fe2434d1b577c0be27e",
+    "revision": "9117dc7cd7770918b78f97f067fdc9a3",
+    "url": "https://fakenooz.grantburry.com/static/media/logo.9117dc7c.svg"
+  },
+  {
+    "revision": "5425fd0e5f6b1e26e44782b5525b7c13",
     "url": "https://fakenooz.grantburry.com/index.html"
   }
 ];

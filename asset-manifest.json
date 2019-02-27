@@ -1,7 +1,7 @@
 {
   "main.css": "https://fakenooz.grantburry.com/static/css/main.5829dcd4.chunk.css",
-  "main.js": "https://fakenooz.grantburry.com/static/js/main.0a2216d0.chunk.js",
-  "main.js.map": "https://fakenooz.grantburry.com/static/js/main.0a2216d0.chunk.js.map",
+  "main.js": "https://fakenooz.grantburry.com/static/js/main.c6d79886.chunk.js",
+  "main.js.map": "https://fakenooz.grantburry.com/static/js/main.c6d79886.chunk.js.map",
   "runtime~main.js": "https://fakenooz.grantburry.com/static/js/runtime~main.d4499ee2.js",
   "runtime~main.js.map": "https://fakenooz.grantburry.com/static/js/runtime~main.d4499ee2.js.map",
   "static/js/2.cf44b345.chunk.js": "https://fakenooz.grantburry.com/static/js/2.cf44b345.chunk.js",
@@ -13,7 +13,8 @@
   "static/js/5.147fc9be.chunk.js": "https://fakenooz.grantburry.com/static/js/5.147fc9be.chunk.js",
   "static/js/5.147fc9be.chunk.js.map": "https://fakenooz.grantburry.com/static/js/5.147fc9be.chunk.js.map",
   "index.html": "https://fakenooz.grantburry.com/index.html",
-  "precache-manifest.0e0161729af757dfa367315e41e026d4.js": "https://fakenooz.grantburry.com/precache-manifest.0e0161729af757dfa367315e41e026d4.js",
+  "precache-manifest.7eacb25beceaa8a04de345a8bd13f62d.js": "https://fakenooz.grantburry.com/precache-manifest.7eacb25beceaa8a04de345a8bd13f62d.js",
   "service-worker.js": "https://fakenooz.grantburry.com/service-worker.js",
-  "static/css/main.5829dcd4.chunk.css.map": "https://fakenooz.grantburry.com/static/css/main.5829dcd4.chunk.css.map"
+  "static/css/main.5829dcd4.chunk.css.map": "https://fakenooz.grantburry.com/static/css/main.5829dcd4.chunk.css.map",
+  "static/media/logo.9117dc7c.svg": "https://fakenooz.grantburry.com/static/media/logo.9117dc7c.svg"
 }
