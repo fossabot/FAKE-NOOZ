@@ -83,8 +83,12 @@ const About = ({ show, onHide }) => (
                             />
                             {isReal ? 'Real' : 'Fake'}
                         </td>
-                        <SourceLink href={site} label="site" />
-                        <SourceLink href={rss} label="RSS feed" />
+                        <SourceLink source={source} href={site} label="site" />
+                        <SourceLink
+                            source={source}
+                            href={rss}
+                            label="RSS feed"
+                        />
                     </tr>
                 ))}
             </Table>

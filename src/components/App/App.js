@@ -8,15 +8,18 @@ import Footer from '../Footer';
 import './App.scss';
 
 const App = () => {
+    const [loading, setLoading] = useState(true);
     const [round, setRound] = useState(1);
     const [score, setScore] = useState(0);
     const [handleNewGame, setHandleNewGame] = useState();
     const [handlePlay, setHandlePlay] = useState();
 
-    const keyHandlers = {
-        r: () => handlePlay(true),
-        f: () => handlePlay(false)
-    };
+    const keyHandlers = loading
+        ? {}
+        : {
+              r: () => handlePlay(true),
+              f: () => handlePlay(false)
+          };
 
     return (
         <HotKeys handlers={keyHandlers} focused tabIndex="-1">
@@ -26,6 +29,7 @@ const App = () => {
                     <Navbar
                         round={round}
                         score={score}
+                        loading={loading}
                         handleNewGame={handleNewGame}
                     />
                     <Switch>
@@ -38,8 +42,10 @@ const App = () => {
                                     score={score}
                                     setScore={setScore}
                                     setRound={setRound}
+                                    loading={loading}
                                     playHandler={handlePlay}
                                     newGameHandler={handleNewGame}
+                                    setLoading={setLoading}
                                     setHandlePlay={setHandlePlay}
                                     setHandleNewGame={setHandleNewGame}
                                     {...props}

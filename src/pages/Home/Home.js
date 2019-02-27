@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { number, func } from 'prop-types';
-import classNames from 'classnames';
+import { number, func, bool } from 'prop-types';
 import Helmet from 'react-helmet';
 import { Container, Row, Col } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinnerThird } from '@fortawesome/pro-regular-svg-icons';
 import Parser from 'rss-parser';
+import Loading from '../../components/Loading';
 import Game from './Game';
 import feedMetadata from '../../feedMetadata';
 
@@ -19,15 +17,6 @@ const randomArticle = feeds => {
     try {
         const { source, isReal, items } = randomElement(feeds);
         const { title, content, link } = randomElement(items);
-        console.info({
-            article: {
-                source,
-                isReal,
-                title,
-                content,
-                link
-            }
-        });
         return {
             source,
             isReal,
@@ -41,31 +30,15 @@ const randomArticle = feeds => {
     }
 };
 
-const Loading = () => (
-    <p
-        className={classNames(
-            'd-flex',
-            'align-items-center',
-            'justify-content-center'
-        )}
-    >
-        <FontAwesomeIcon
-            icon={faSpinnerThird}
-            size="2x"
-            spin
-            className={classNames('mr-3', 'text-primary')}
-        />
-        Loading news feeds...
-    </p>
-);
-
 const Home = ({
     round,
     score,
     setScore,
     setRound,
+    loading,
     playHandler,
     newGameHandler,
+    setLoading,
     setHandlePlay,
     setHandleNewGame
 }) => {
@@ -94,6 +67,7 @@ const Home = ({
     };
 
     const handlePlay = isReal => {
+        console.info('New play / isReal: ', isReal, ' article: ', article);
         setScore(
             article.isReal === isReal ? score + 1 : Math.max(score - 1, 0)
         );
@@ -118,12 +92,13 @@ const Home = ({
     useEffect(() => {
         if (!feeds.length) fetchFeeds();
         else if (!article) setArticle(randomArticle(feeds));
+        else setLoading(false);
         if (!playHandler) setHandlePlay(handlePlayParent);
         if (!newGameHandler) setHandleNewGame(handleNewGame);
     }, [feeds, article, playHandler, newGameHandler]);
 
     return (
-        <Container className="py-5" role="main">
+        <Container role="main">
             <Helmet title="FAKE NOOZ" />
             <Row>
                 <Col
@@ -131,7 +106,9 @@ const Home = ({
                     md={{ span: 6, offset: 3 }}
                     aria-live="polite"
                 >
-                    {article ? (
+                    {loading ? (
+                        <Loading isLoading pastDelay />
+                    ) : (
                         <Game
                             article={article}
                             realPlay={realPlay}
@@ -140,8 +117,6 @@ const Home = ({
                             handleRealButton={() => handlePlay(true)}
                             handleFakeButton={() => handlePlay(false)}
                         />
-                    ) : (
-                        <Loading />
                     )}
                 </Col>
             </Row>
@@ -154,8 +129,10 @@ Home.propTypes = {
     score: number.isRequired,
     setScore: func.isRequired,
     setRound: func.isRequired,
+    loading: bool.isRequired,
     playHandler: func,
     newGameHandler: func,
+    setLoading: func.isRequired,
     setHandlePlay: func.isRequired,
     setHandleNewGame: func.isRequired
 };

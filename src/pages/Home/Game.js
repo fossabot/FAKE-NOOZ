@@ -12,18 +12,22 @@ const Game = ({
     handleFakeButton
 }) => {
     const win = article && article.isReal === realPlay;
-    return showResult ? (
-        <Result
-            article={article}
-            win={win}
-            handleNextArticle={handleNextArticle}
-        />
-    ) : (
-        <Round
-            article={article}
-            handleRealButton={handleRealButton}
-            handleFakeButton={handleFakeButton}
-        />
+    return (
+        <div className="py-5">
+            {showResult ? (
+                <Result
+                    article={article}
+                    win={win}
+                    handleNextArticle={handleNextArticle}
+                />
+            ) : (
+                <Round
+                    article={article}
+                    handleRealButton={handleRealButton}
+                    handleFakeButton={handleFakeButton}
+                />
+            )}
+        </div>
     );
 };
 

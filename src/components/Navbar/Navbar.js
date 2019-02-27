@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { number, func } from 'prop-types';
+import { number, func, bool } from 'prop-types';
 import classNames from 'classnames';
 import { NavLink as Link } from 'react-router-dom';
 import { Container, Navbar, Nav } from 'react-bootstrap';
@@ -23,7 +23,7 @@ const iconClass = classNames(
     'd-lg-block'
 );
 
-const CustomNavbar = ({ round, score, handleNewGame }) => {
+const CustomNavbar = ({ round, score, loading, handleNewGame }) => {
     const [showAboutModal, setShowAboutModal] = useState(false);
     const handleShowAboutModal = () => setShowAboutModal(true);
     const handleCloseAboutModal = () => setShowAboutModal(false);
@@ -81,7 +81,7 @@ const CustomNavbar = ({ round, score, handleNewGame }) => {
                         </h5>
                     </div>
                     <Nav role="navigation">
-                        {handleNewGame && (
+                        {!loading && (
                             <Nav.Link
                                 className={linkClass}
                                 onClick={handleNewGame}
@@ -116,6 +116,7 @@ const CustomNavbar = ({ round, score, handleNewGame }) => {
 CustomNavbar.propTypes = {
     round: number.isRequired,
     score: number.isRequired,
+    loading: bool.isRequired,
     handleNewGame: func
 };
 
