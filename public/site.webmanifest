@@ -4,8 +4,8 @@
     "description": "Can you tell what's fake news and what's real?",
     "start_url": "/",
     "display": "standalone",
-    "theme_color": "#007bff",
-    "background_color": "#ffffff",
+    "theme_color": "#dc3545",
+    "background_color": "#212529",
     "icons": [{
             "src": "favicon.ico",
             "sizes": "64x64 32x32 24x24 16x16",

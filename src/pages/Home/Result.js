@@ -15,21 +15,27 @@ const Result = ({
     win,
     handleNextArticle
 }) => {
-    const winVariant = win ? 'success' : 'danger';
+    const winVariant = win ? 'success' : 'primary';
     return (
         <>
+            <h3
+                className={classNames(
+                    'text-center',
+                    `text-${winVariant}`,
+                    'mb-5'
+                )}
+            >
+                {win ? 'Correct!' : 'Incorrect'}
+            </h3>
             <Card bg={winVariant} border={winVariant} className="text-center">
                 <Card.Body>
-                    <Card.Title as="h4">
-                        {win ? 'Correct!' : 'Incorrect'}
-                    </Card.Title>
-                    <h5>
+                    <Card.Title>
                         <FontAwesomeIcon
                             icon={isReal ? faCheckCircle : faTimesCircle}
                             className="mr-2"
                         />
                         {isReal ? 'Real News' : 'Fake News'}
-                    </h5>
+                    </Card.Title>
                     <h6>{source}</h6>
                     <a
                         href={link}

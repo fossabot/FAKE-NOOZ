@@ -70,7 +70,7 @@ $colors: map-merge(
     $colors
 );
 
-$primary:       $blue;
+$primary:       $red;
 $secondary:     $gray-600;
 $success:       $green;
 $info:          $blue;
@@ -220,7 +220,7 @@ $line-height-lg:              1.5;
 $line-height-sm:              1.5;
 
 $border-width:                1px;
-$border-color:                $gray-300;
+$border-color:                $gray-900;
 
 $border-radius:               0.25rem;
 $border-radius-lg:            0.3rem;
@@ -824,7 +824,7 @@ $modal-dialog-margin-y-sm-up:       1.75rem;
 
 $modal-title-line-height:           $line-height-base;
 
-$modal-content-bg:                  $white;
+$modal-content-bg:                  $dark;
 $modal-content-border-color:        rgba($black, 0.2);
 $modal-content-border-width:        $border-width;
 $modal-content-border-radius:       $border-radius-lg;
@@ -833,7 +833,7 @@ $modal-content-box-shadow-sm-up:    0 0.5rem 1rem rgba($black, 0.5);
 
 $modal-backdrop-bg:                 $black;
 $modal-backdrop-opacity:            0.5;
-$modal-header-border-color:         $gray-200;
+$modal-header-border-color:         $gray-900;
 $modal-footer-border-color:         $modal-header-border-color;
 $modal-header-border-width:         $modal-content-border-width;
 $modal-footer-border-width:         $modal-header-border-width;

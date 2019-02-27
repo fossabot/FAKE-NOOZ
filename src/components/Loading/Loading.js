@@ -22,8 +22,8 @@ const Loading = ({ isLoading, pastDelay, error }) =>
                         )}
                     </div>
                     {error && (
-                        <Alert variant="danger" className="m-0">
-                            <Media>
+                        <Alert variant="primary" className="m-0">
+                            <Media className="align-items-center">
                                 <Media className="mr-3">
                                     <FontAwesomeIcon
                                         icon={faExclamationTriangle}

@@ -6,6 +6,8 @@ export const Home = Loadable({
     loading
 });
 
+export { default as About } from './About';
+
 export const NotFound = Loadable({
     loader: () => import('./NotFound'),
     loading

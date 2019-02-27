@@ -26,8 +26,6 @@ const App = () => {
                     <Navbar
                         round={round}
                         score={score}
-                        setScore={setScore}
-                        setRound={setRound}
                         handleNewGame={handleNewGame}
                     />
                     <Switch>

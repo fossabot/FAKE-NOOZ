@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinnerThird } from '@fortawesome/pro-regular-svg-icons';
 import Parser from 'rss-parser';
 import Game from './Game';
-import feedMetadata from './feedMetadata';
+import feedMetadata from '../../feedMetadata';
 
 const parser = new Parser();
 const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
@@ -17,8 +17,17 @@ const randomElement = array =>
 
 const randomArticle = feeds => {
     try {
-        const { title: source, isReal, items } = randomElement(feeds);
+        const { source, isReal, items } = randomElement(feeds);
         const { title, content, link } = randomElement(items);
+        console.info({
+            article: {
+                source,
+                isReal,
+                title,
+                content,
+                link
+            }
+        });
         return {
             source,
             isReal,
@@ -27,7 +36,8 @@ const randomArticle = feeds => {
             link
         };
     } catch (error) {
-        console.error('Failed to get random article: ', error)
+        console.error('Failed to get random article: ', error);
+        return null;
     }
 };
 
@@ -70,7 +80,9 @@ const Home = ({
             ...(await Promise.all(
                 feedMetadata.map(async meta => {
                     try {
-                        const feed = await parser.parseURL(CORS_PROXY + meta.link);
+                        const feed = await parser.parseURL(
+                            CORS_PROXY + meta.rss
+                        );
                         return { ...feed, ...meta };
                     } catch (error) {
                         console.error(error);
@@ -82,7 +94,9 @@ const Home = ({
     };
 
     const handlePlay = isReal => {
-        setScore(article.isReal === isReal ? score + 1 : Math.max(score - 1, 0));
+        setScore(
+            article.isReal === isReal ? score + 1 : Math.max(score - 1, 0)
+        );
         setRealPlay(isReal);
         setShowResult(true);
     };
@@ -111,9 +125,12 @@ const Home = ({
     return (
         <Container className="py-5" role="main">
             <Helmet title="FAKE NOOZ" />
-            <h3 className="text-center mb-5">Is it real or fake?</h3>
             <Row>
-                <Col sm={{ span: 8, offset: 2 }} md={{ span: 6, offset: 3 }} aria-live="polite">
+                <Col
+                    sm={{ span: 8, offset: 2 }}
+                    md={{ span: 6, offset: 3 }}
+                    aria-live="polite"
+                >
                     {article ? (
                         <Game
                             article={article}

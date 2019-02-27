@@ -17,7 +17,7 @@ const Footer = () => (
             &copy; {new Date().getFullYear()} Grant Burry & Vamshi Arugonda
             <span className={classNames(styles.spacer, 'mx-2')}>&middot;</span>
             {process.env.NODE_ENV === 'development' ? (
-                <span className="text-danger">Development Mode</span>
+                <span className="text-primary">Development Mode</span>
             ) : (
                 'All rights reserved'
             )}
