@@ -19,9 +19,6 @@ const StartGame = ({
         <Form onSubmit={handleStartGame}>
             <Card className="text-center">
                 <Card.Body>
-                    <Card.Title aria-label="Article title">
-                        <b>FAKE NOOZ</b>
-                    </Card.Title>
                     Can you tell what&apos;s real news and what&apos;s fake
                     news? Take a look at these articles and see how good you are
                     at finding fact from fiction.
