@@ -24,6 +24,7 @@ const Round = ({
             /\s*makeamericathebest.com Your Trusted Source for Faux News\./g,
             ''
         ); // Remove "Make America The Best" tagline
+    const articleContentExists = formattedArticle && formattedArticle !== '';
     return (
         <>
             <h3 className={classNames('text-center', 'mb-4', 'mb-md-5')}>
@@ -31,8 +32,13 @@ const Round = ({
             </h3>
             <Card>
                 <Card.Body>
-                    <Card.Title aria-label="Article title">{title}</Card.Title>
-                    {formattedArticle && formattedArticle !== '' && (
+                    <Card.Title
+                        aria-label="Article title"
+                        className={classNames(!articleContentExists && 'mb-0')}
+                    >
+                        {title}
+                    </Card.Title>
+                    {articleContentExists && (
                         <article /* eslint-disable react/no-danger */
                             dangerouslySetInnerHTML={{
                                 __html: formattedArticle
