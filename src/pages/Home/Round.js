@@ -16,7 +16,8 @@ const Round = ({
         .replace(/<\/?p[^>]*>/g, '') // Remove paragraphs
         .replace(/<table[^>]*>.*<\/table>/g, '') // Remove tables (Reddit)
         .replace(/submitted by.*/g, '') // Remove submitted by (Reddit)
-        .replace(/<br[^>]*>.*/g, '') // Remove line breaks
+        .replace(/<br.*/g, '') // Remove line breaks and following content
+        .replace(/ The post \./g, '') // Remove "The post ."
         .replace(
             /\s*makeamericathebest.com Your Trusted Source for Faux News\./g,
             ''
