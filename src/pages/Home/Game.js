@@ -1,46 +1,86 @@
 import React from 'react';
-import { func, shape, bool } from 'prop-types';
-import Result from './Result';
+import { func, arrayOf, shape, bool } from 'prop-types';
+import StartGame from './StartGame';
 import Round from './Round';
+import Result from './Result';
+import GameOver from './GameOver';
 
 const Game = ({
+    stats,
+    feeds,
     article,
     realPlay,
-    showResult,
-    handleNextArticle,
+    handleStartGame,
+    handleRoundSetting,
+    handleNextRound,
     handleRealButton,
-    handleFakeButton
+    handleFakeButton,
+    handleNewGame
 }) => {
     const win = article && article.isReal === realPlay;
-    return (
-        <div className="py-5">
-            {showResult ? (
-                <Result
-                    article={article}
-                    win={win}
-                    handleNextArticle={handleNextArticle}
+    let Stage;
+
+    switch (stats.stage) {
+        case 'start-game':
+            Stage = () => (
+                <StartGame
+                    stats={stats}
+                    feeds={feeds}
+                    handleStartGame={handleStartGame}
+                    handleRoundSetting={handleRoundSetting}
                 />
-            ) : (
+            );
+            break;
+        case 'round':
+            Stage = () => (
                 <Round
                     article={article}
                     handleRealButton={handleRealButton}
                     handleFakeButton={handleFakeButton}
                 />
-            )}
+            );
+            break;
+        case 'result':
+            Stage = () => (
+                <Result
+                    article={article}
+                    win={win}
+                    handleNextRound={handleNextRound}
+                />
+            );
+            break;
+        case 'end-game':
+            Stage = () => (
+                <GameOver stats={stats} handleNewGame={handleNewGame} />
+            );
+            break;
+        default:
+            Stage = () => null;
+            break;
+    }
+
+    return (
+        <div className="py-5">
+            <Stage />
         </div>
     );
 };
 
 Game.propTypes = {
+    stats: shape({}).isRequired,
+    feeds: arrayOf(shape({})),
     article: shape({}).isRequired,
     realPlay: bool,
-    showResult: bool.isRequired,
-    handleNextArticle: func.isRequired,
+    handleStartGame: func.isRequired,
+    handleRoundSetting: func.isRequired,
+    handleNextRound: func.isRequired,
     handleRealButton: func.isRequired,
-    handleFakeButton: func.isRequired
+    handleFakeButton: func.isRequired,
+    handleNewGame: func.isRequired
 };
 
 Game.defaultProps = {
+    feeds: undefined,
     realPlay: undefined
 };
 

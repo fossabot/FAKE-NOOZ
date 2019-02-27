@@ -15,6 +15,7 @@ const Round = ({
         .replace(/<a[^>]*>.*<\/a>/g, '') // Remove links
         .replace(/<\/?p[^>]*>/g, '') // Remove paragraphs
         .replace(/<table[^>]*>.*<\/table>/g, '') // Remove tables (Reddit)
+        .replace(/submitted by.*/g, '') // Remove submitted by (Reddit)
         .replace(/<br[^>]*>.*/g, '') // Remove line breaks
         .replace(
             /\s*makeamericathebest.com Your Trusted Source for Faux News\./g,
@@ -25,7 +26,7 @@ const Round = ({
             <h3 className={classNames('text-center', 'mb-5')}>
                 Is it real or fake?
             </h3>
-            <Card bg="dark" border="dark">
+            <Card>
                 <Card.Body>
                     <Card.Title aria-label="Article title">{title}</Card.Title>
                     {formattedArticle && formattedArticle !== '' ? (
@@ -35,7 +36,7 @@ const Round = ({
                             }}
                         />
                     ) : (
-                        <span className="text-muted">No content</span>
+                        <span className="text-muted">No feed content</span>
                     )}
                 </Card.Body>
             </Card>

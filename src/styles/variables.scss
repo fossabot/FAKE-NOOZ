@@ -738,10 +738,10 @@ $card-spacer-y:                     0.75rem;
 $card-spacer-x:                     1.25rem;
 $card-border-width:                 $border-width;
 $card-border-radius:                $border-radius;
-$card-border-color:                 rgba($black, 0.125);
+$card-border-color:                 $dark;
 $card-inner-border-radius:          calc(#{$card-border-radius} - #{$card-border-width});
 $card-cap-bg:                       rgba($black, 0.03);
-$card-bg:                           $white;
+$card-bg:                           $dark;
 
 $card-img-overlay-padding:          1.25rem;
 

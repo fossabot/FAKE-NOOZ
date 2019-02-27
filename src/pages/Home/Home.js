@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { number, func, bool } from 'prop-types';
+import { shape, number, func, bool } from 'prop-types';
 import Helmet from 'react-helmet';
 import { Container, Row, Col } from 'react-bootstrap';
 import Parser from 'rss-parser';
@@ -25,31 +25,30 @@ const randomArticle = feeds => {
             link
         };
     } catch (error) {
-        console.error('Failed to get random article: ', error);
         return null;
     }
 };
 
 const Home = ({
-    round,
-    score,
+    stats,
     setScore,
     setRound,
-    loading,
+    setGameRounds,
+    setLoading,
+    setStage,
     playHandler,
     newGameHandler,
-    setLoading,
     setHandlePlay,
     setHandleNewGame
 }) => {
     const [feeds, setFeeds] = useState([]);
     const [article, setArticle] = useState();
     const [realPlay, setRealPlay] = useState();
-    const [showResult, setShowResult] = useState(false);
+    const { round, gameRounds, score, loading } = stats;
 
-    const fetchFeeds = async () => {
+    const fetchFeeds = async clear => {
         setFeeds([
-            ...feeds,
+            ...(clear ? [] : feeds),
             ...(await Promise.all(
                 feedMetadata.map(async meta => {
                     try {
@@ -67,34 +66,59 @@ const Home = ({
     };
 
     const handlePlay = isReal => {
-        console.info('New play / isReal: ', isReal, ' article: ', article);
         setScore(
             article.isReal === isReal ? score + 1 : Math.max(score - 1, 0)
         );
         setRealPlay(isReal);
-        setShowResult(true);
+        setStage('result');
     };
 
     const handlePlayParent = () => handlePlay;
 
-    const handleNextArticle = advanceRound => {
-        if (advanceRound) setRound(round + 1);
-        setArticle(randomArticle(feeds));
-        setShowResult(false);
+    const handleStartGame = event => {
+        event.preventDefault();
+        setStage('round');
     };
 
-    const handleNewGame = () => () => {
-        setScore(0);
-        setRound(1);
-        handleNextArticle(false);
+    const handleRoundSetting = event => setGameRounds(event.target.value);
+
+    const handleNextRound = advanceRound => {
+        if (round < gameRounds) {
+            if (advanceRound) setRound(round + 1);
+            setFeeds(
+                feeds.map(feed => ({
+                    items: feed.items.filter(
+                        ({ link }) => link !== article.link
+                    ),
+                    ...feed
+                }))
+            );
+            const nextRound = randomArticle(feeds);
+            if (nextRound) {
+                setArticle(nextRound);
+                setStage('round');
+            } else setStage('end-game');
+        } else setStage('end-game');
     };
+
+    const handleNewGame = async () => {
+        setLoading(true);
+        await fetchFeeds(true);
+        handleNextRound(false);
+        setStage('start-game');
+        setRound(1);
+        setScore(0);
+        setLoading(false);
+    };
+
+    const handleNewGameParent = () => handleNewGame;
 
     useEffect(() => {
         if (!feeds.length) fetchFeeds();
         else if (!article) setArticle(randomArticle(feeds));
         else setLoading(false);
         if (!playHandler) setHandlePlay(handlePlayParent);
-        if (!newGameHandler) setHandleNewGame(handleNewGame);
+        if (!newGameHandler) setHandleNewGame(handleNewGameParent);
     }, [feeds, article, playHandler, newGameHandler]);
 
     return (
@@ -102,20 +126,25 @@ const Home = ({
             <Helmet title="FAKE NOOZ" />
             <Row>
                 <Col
-                    sm={{ span: 8, offset: 2 }}
-                    md={{ span: 6, offset: 3 }}
+                    sm={{ span: 10, offset: 1 }}
+                    lg={{ span: 8, offset: 2 }}
+                    xl={{ span: 6, offset: 3 }}
                     aria-live="polite"
                 >
                     {loading ? (
                         <Loading isLoading pastDelay />
                     ) : (
                         <Game
+                            stats={stats}
+                            feeds={feeds}
                             article={article}
                             realPlay={realPlay}
-                            showResult={showResult}
-                            handleNextArticle={handleNextArticle}
+                            handleStartGame={handleStartGame}
+                            handleRoundSetting={handleRoundSetting}
+                            handleNextRound={handleNextRound}
                             handleRealButton={() => handlePlay(true)}
                             handleFakeButton={() => handlePlay(false)}
+                            handleNewGame={handleNewGame}
                         />
                     )}
                 </Col>
@@ -125,14 +154,19 @@ const Home = ({
 };
 
 Home.propTypes = {
-    round: number.isRequired,
-    score: number.isRequired,
+    stats: shape({
+        round: number.isRequired,
+        gameRounds: number.isRequired,
+        score: number.isRequired,
+        loading: bool.isRequired
+    }).isRequired,
     setScore: func.isRequired,
     setRound: func.isRequired,
-    loading: bool.isRequired,
+    setGameRounds: func.isRequired,
+    setLoading: func.isRequired,
+    setStage: func.isRequired,
     playHandler: func,
     newGameHandler: func,
-    setLoading: func.isRequired,
     setHandlePlay: func.isRequired,
     setHandleNewGame: func.isRequired
 };

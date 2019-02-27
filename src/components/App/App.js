@@ -9,10 +9,18 @@ import './App.scss';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
+    const [stage, setStage] = useState('start-game');
     const [round, setRound] = useState(1);
+    const [gameRounds, setGameRounds] = useState(10);
     const [score, setScore] = useState(0);
     const [handleNewGame, setHandleNewGame] = useState();
     const [handlePlay, setHandlePlay] = useState();
+
+    const accuracy = `${Math.round(
+        (100 * score) / (stage === 'round' ? Math.max(1, round - 1) : round)
+    )}%`;
+
+    const stats = { stage, round, gameRounds, score, accuracy, loading };
 
     const keyHandlers = loading
         ? {}
@@ -26,26 +34,21 @@ const App = () => {
             <BrowserRouter>
                 <>
                     <Helmet defaultTitle="FAKE NOOZ" />
-                    <Navbar
-                        round={round}
-                        score={score}
-                        loading={loading}
-                        handleNewGame={handleNewGame}
-                    />
+                    <Navbar stats={stats} handleNewGame={handleNewGame} />
                     <Switch>
                         <Route
                             exact
                             path="/"
                             render={props => (
                                 <Home
-                                    round={round}
-                                    score={score}
+                                    stats={stats}
                                     setScore={setScore}
                                     setRound={setRound}
-                                    loading={loading}
+                                    setGameRounds={setGameRounds}
+                                    setLoading={setLoading}
+                                    setStage={setStage}
                                     playHandler={handlePlay}
                                     newGameHandler={handleNewGame}
-                                    setLoading={setLoading}
                                     setHandlePlay={setHandlePlay}
                                     setHandleNewGame={setHandleNewGame}
                                     {...props}

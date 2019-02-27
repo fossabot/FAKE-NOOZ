@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { number, func, bool } from 'prop-types';
+import { shape, number, string, func, bool } from 'prop-types';
 import classNames from 'classnames';
 import { NavLink as Link } from 'react-router-dom';
 import { Container, Navbar, Nav } from 'react-bootstrap';
@@ -23,7 +23,10 @@ const iconClass = classNames(
     'd-lg-block'
 );
 
-const CustomNavbar = ({ round, score, loading, handleNewGame }) => {
+const CustomNavbar = ({
+    stats: { stage, round, gameRounds, score, accuracy, loading },
+    handleNewGame
+}) => {
     const [showAboutModal, setShowAboutModal] = useState(false);
     const handleShowAboutModal = () => setShowAboutModal(true);
     const handleCloseAboutModal = () => setShowAboutModal(false);
@@ -62,26 +65,54 @@ const CustomNavbar = ({ round, score, loading, handleNewGame }) => {
                             FAKE NOOZ
                         </h4>
                     </Navbar.Brand>
-                    <div
-                        className={classNames(
-                            styles.gameInfo,
-                            'text-center',
-                            'd-flex',
-                            'align-items-center',
-                            'justify-content-center'
-                        )}
-                    >
-                        <h5 className="mr-3">
-                            <div>Round</div>
-                            <small>{round}</small>
-                        </h5>
-                        <h5 className="ml-3">
-                            <div>Score</div>
-                            <small>{score}</small>
-                        </h5>
-                    </div>
+                    {!loading && !/.+-game/g.test(stage) && (
+                        <div
+                            className={classNames(
+                                styles.gameInfo,
+                                'text-center',
+                                'd-flex',
+                                'align-items-center',
+                                'justify-content-center'
+                            )}
+                        >
+                            <h5
+                                className={classNames('d-inline', 'd-md-block')}
+                            >
+                                Round
+                                <br
+                                    className={classNames(
+                                        'd-none',
+                                        'd-md-block'
+                                    )}
+                                />
+                                <small>
+                                    {round} / {gameRounds}
+                                </small>
+                            </h5>
+                            <h5 className="mx-2 mx-md-3">
+                                Score
+                                <br
+                                    className={classNames(
+                                        'd-none',
+                                        'd-md-block'
+                                    )}
+                                />
+                                <small>{score}</small>
+                            </h5>
+                            <h5>
+                                Accuracy
+                                <br
+                                    className={classNames(
+                                        'd-none',
+                                        'd-md-block'
+                                    )}
+                                />
+                                <small>{accuracy}</small>
+                            </h5>
+                        </div>
+                    )}
                     <Nav role="navigation">
-                        {!loading && (
+                        {!loading && stage !== 'start-game' && (
                             <Nav.Link
                                 className={linkClass}
                                 onClick={handleNewGame}
@@ -114,9 +145,14 @@ const CustomNavbar = ({ round, score, loading, handleNewGame }) => {
 };
 
 CustomNavbar.propTypes = {
-    round: number.isRequired,
-    score: number.isRequired,
-    loading: bool.isRequired,
+    stats: shape({
+        stage: string.isRequired,
+        round: number.isRequired,
+        gameRounds: number.isRequired,
+        score: number.isRequired,
+        accuracy: string.isRequired,
+        loading: bool.isRequired
+    }).isRequired,
     handleNewGame: func
 };
 

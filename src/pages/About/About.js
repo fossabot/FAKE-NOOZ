@@ -67,30 +67,40 @@ const About = ({ show, onHide }) => (
                 variant="dark"
                 className={classNames('my-3', 'rounded', 'text-center')}
             >
-                <tr>
-                    <th className="text-left">Source</th>
-                    <th>Type</th>
-                    <th>Site</th>
-                    <th>RSS Feed</th>
-                </tr>
-                {feedMetadata.map(({ source, site, rss, isReal }) => (
-                    <tr key={source}>
-                        <td className="text-left">{source}</td>
-                        <td>
-                            <FontAwesomeIcon
-                                icon={isReal ? faCheckCircle : faTimesCircle}
-                                className="mr-2"
-                            />
-                            {isReal ? 'Real' : 'Fake'}
-                        </td>
-                        <SourceLink source={source} href={site} label="site" />
-                        <SourceLink
-                            source={source}
-                            href={rss}
-                            label="RSS feed"
-                        />
+                <thead>
+                    <tr>
+                        <th className="text-left">Source</th>
+                        <th>Type</th>
+                        <th>Site</th>
+                        <th>RSS Feed</th>
                     </tr>
-                ))}
+                </thead>
+                <tbody>
+                    {feedMetadata.map(({ source, site, rss, isReal }) => (
+                        <tr key={source}>
+                            <td className="text-left">{source}</td>
+                            <td>
+                                <FontAwesomeIcon
+                                    icon={
+                                        isReal ? faCheckCircle : faTimesCircle
+                                    }
+                                    className="mr-2"
+                                />
+                                {isReal ? 'Real' : 'Fake'}
+                            </td>
+                            <SourceLink
+                                source={source}
+                                href={site}
+                                label="site"
+                            />
+                            <SourceLink
+                                source={source}
+                                href={rss}
+                                label="RSS feed"
+                            />
+                        </tr>
+                    ))}
+                </tbody>
             </Table>
             <p>
                 We make no claims on and take no responsibility for the content

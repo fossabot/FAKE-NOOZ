@@ -13,21 +13,25 @@ import {
 const Result = ({
     article: { source, isReal, title, link },
     win,
-    handleNextArticle
+    handleNextRound
 }) => {
-    const winVariant = win ? 'success' : 'primary';
+    const resultVariant = win ? 'success' : 'primary';
     return (
         <>
             <h3
                 className={classNames(
                     'text-center',
-                    `text-${winVariant}`,
+                    `text-${resultVariant}`,
                     'mb-5'
                 )}
             >
                 {win ? 'Correct!' : 'Incorrect'}
             </h3>
-            <Card bg={winVariant} border={winVariant} className="text-center">
+            <Card
+                bg={resultVariant}
+                border={resultVariant}
+                className="text-center"
+            >
                 <Card.Body>
                     <Card.Title>
                         <FontAwesomeIcon
@@ -58,7 +62,7 @@ const Result = ({
                     'mt-4'
                 )}
             >
-                <Button variant="light" size="lg" onClick={handleNextArticle}>
+                <Button variant="light" size="lg" onClick={handleNextRound}>
                     <FontAwesomeIcon
                         icon={faChevronCircleRight}
                         className="mr-2"
@@ -73,7 +77,7 @@ const Result = ({
 Result.propTypes = {
     article: shape({}).isRequired,
     win: bool.isRequired,
-    handleNextArticle: func.isRequired
+    handleNextRound: func.isRequired
 };
 
 export default Result;
