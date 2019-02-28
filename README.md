@@ -9,6 +9,8 @@
     CSCI 4849: Project 1
 </h4>
 
+![Screenshot](Screenshot.png)
+
 FAKE NOOZ is a simple game to test how well you can determine what is real news apart from fake news. We're not really talking about fake news here—content which is designed to deceive you—instead our fake news sources are parody/satire sites that don't hesitate to acknowledge their work as comedy. Here are all the news and parody RSS feeds we use for FAKE NOOZ:
 
 | Source                  | Type | Site                                      | RSS Feed                                                      |
