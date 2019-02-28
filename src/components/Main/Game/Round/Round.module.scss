@@ -1,5 +1,20 @@
 @import '../../../../variables';
 
-.roundContainer {
-    overflow: hidden;
+.swipeBadge {
+    font-size: 0;
+    transition: 0.5s font-size cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform: translateX(-100%);
+    pointer-events: none;
+}
+
+.swipeReal {
+    transform: translateX(100%);
+}
+
+.swipeFake {
+    transform: translateX(-100%);
+}
+
+.swipeActive {
+    font-size: initial;
 }

@@ -13,16 +13,15 @@ const Game = ({
     handleStartGame,
     handleRoundSetting,
     handleNextRound,
-    handleRealButton,
-    handleFakeButton,
+    handleRealPlay,
+    handleFakePlay,
     handleNewGame
 }) => {
     const win = article && article.isReal === realPlay;
-    let Stage;
 
     switch (stats.stage) {
         case 'start-game':
-            Stage = () => (
+            return (
                 <StartGame
                     stats={stats}
                     feeds={feeds}
@@ -30,40 +29,27 @@ const Game = ({
                     handleRoundSetting={handleRoundSetting}
                 />
             );
-            break;
         case 'round':
-            Stage = () => (
+            return (
                 <Round
                     article={article}
-                    handleRealButton={handleRealButton}
-                    handleFakeButton={handleFakeButton}
+                    handleRealPlay={handleRealPlay}
+                    handleFakePlay={handleFakePlay}
                 />
             );
-            break;
         case 'result':
-            Stage = () => (
+            return (
                 <Result
                     article={article}
                     win={win}
                     handleNextRound={handleNextRound}
                 />
             );
-            break;
         case 'end-game':
-            Stage = () => (
-                <GameOver stats={stats} handleNewGame={handleNewGame} />
-            );
-            break;
+            return <GameOver stats={stats} handleNewGame={handleNewGame} />;
         default:
-            Stage = () => null;
-            break;
+            return null;
     }
-
-    return (
-        <div className="py-4 py-md-5" aria-live="polite">
-            <Stage />
-        </div>
-    );
 };
 
 Game.propTypes = {
@@ -74,8 +60,8 @@ Game.propTypes = {
     handleStartGame: func.isRequired,
     handleRoundSetting: func.isRequired,
     handleNextRound: func.isRequired,
-    handleRealButton: func.isRequired,
-    handleFakeButton: func.isRequired,
+    handleRealPlay: func.isRequired,
+    handleFakePlay: func.isRequired,
     handleNewGame: func.isRequired
 };
 

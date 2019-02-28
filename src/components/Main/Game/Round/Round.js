@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { func, shape } from 'prop-types';
+import {
+    bool,
+    string,
+    func,
+    shape,
+    oneOfType,
+    object,
+    array
+} from 'prop-types';
 import classNames from 'classnames';
 import { isMobile } from 'react-device-detect';
 import Swipe from 'react-easy-swipe';
@@ -17,25 +25,60 @@ const browserWidth = () =>
         document.documentElement.clientWidth
     );
 
+const SwipeBadge = ({ active, label, variant, icon, className, ...props }) => (
+    <div
+        className={classNames(
+            styles.swipeBadge,
+            styles[`swipe${label}`],
+            active && styles.swipeActive,
+            'text-center',
+            `text-${variant}`,
+            className
+        )}
+        {...props}
+    >
+        <FontAwesomeIcon
+            icon={icon}
+            size="2x"
+            className={classNames('mx-auto', 'mb-1')}
+        />
+        {label}
+    </div>
+);
+
+SwipeBadge.propTypes = {
+    active: bool.isRequired,
+    label: string.isRequired,
+    variant: string.isRequired,
+    icon: oneOfType([object, array, string]).isRequired,
+    className: string
+};
+
+SwipeBadge.defaultProps = {
+    className: undefined
+};
+
 const Round = ({
     article: { title, content },
-    handleRealButton,
-    handleFakeButton
+    handleRealPlay,
+    handleFakePlay
 }) => {
     const [cardXOffset, setCardXOffset] = useState(0);
 
+    const swipeThreshold = browserWidth() / 2.5;
+    const swipeReal = cardXOffset < -swipeThreshold;
+    const swipeFake = cardXOffset > swipeThreshold;
+
     const onSwipeStart = () => {
-        // console.info('Start swiping...');
+        console.info('Start swiping...');
     };
 
-    const onSwipeMove = ({ x }) => {
-        setCardXOffset(cardXOffset + x);
-    };
+    const onSwipeMove = ({ x }) => setCardXOffset(x);
 
     const onSwipeEnd = () => {
-        const halfBrowserWidth = browserWidth() / 2;
-        if (cardXOffset < -halfBrowserWidth) handleRealButton();
-        if (cardXOffset > halfBrowserWidth) handleFakeButton();
+        if (swipeReal) handleRealPlay();
+        else if (swipeFake) handleFakePlay();
+        else setCardXOffset(0);
     };
 
     const formattedArticle = content
@@ -56,7 +99,7 @@ const Round = ({
     const articleContentExists = formattedArticle && formattedArticle !== '';
 
     return (
-        <div className={styles.roundContainer}>
+        <>
             <h3 className={classNames('text-center', 'mb-4', 'mb-md-5')}>
                 Is it real or fake?
             </h3>
@@ -67,25 +110,46 @@ const Round = ({
                     onSwipeEnd
                 }}
             >
-                <Card style={{ left: cardXOffset }}>
-                    <Card.Body>
-                        <Card.Title
-                            aria-label="Article title"
-                            className={classNames(
-                                !articleContentExists && 'mb-0'
+                <div
+                    className={classNames(
+                        'd-flex',
+                        'align-items-center',
+                        'position-relative'
+                    )}
+                    style={{ left: cardXOffset }}
+                >
+                    <SwipeBadge
+                        active={swipeFake}
+                        label="Fake"
+                        variant="primary"
+                        icon={faTimesCircle}
+                    />
+                    <Card>
+                        <Card.Body>
+                            <Card.Title
+                                aria-label="Article title"
+                                className={classNames(
+                                    !articleContentExists && 'mb-0'
+                                )}
+                            >
+                                {title}
+                            </Card.Title>
+                            {articleContentExists && (
+                                <article /* eslint-disable react/no-danger */
+                                    dangerouslySetInnerHTML={{
+                                        __html: formattedArticle
+                                    }}
+                                />
                             )}
-                        >
-                            {title}
-                        </Card.Title>
-                        {articleContentExists && (
-                            <article /* eslint-disable react/no-danger */
-                                dangerouslySetInnerHTML={{
-                                    __html: formattedArticle
-                                }}
-                            />
-                        )}
-                    </Card.Body>
-                </Card>
+                        </Card.Body>
+                    </Card>
+                    <SwipeBadge
+                        active={swipeReal}
+                        label="Real"
+                        variant="success"
+                        icon={faCheckCircle}
+                    />
+                </div>
             </Swipe>
             <div
                 className={classNames(
@@ -98,9 +162,9 @@ const Round = ({
                 <Button
                     variant="success"
                     size="lg"
-                    className="mr-3"
                     aria-label="It's real"
-                    onClick={handleRealButton}
+                    onClick={handleRealPlay}
+                    className="mr-3"
                 >
                     <FontAwesomeIcon icon={faCheckCircle} className="mr-2" />
                     Real
@@ -108,22 +172,22 @@ const Round = ({
                 <Button
                     variant="primary"
                     size="lg"
-                    className="ml-3"
                     aria-label="It's fake"
-                    onClick={handleFakeButton}
+                    onClick={handleFakePlay}
+                    className="ml-3"
                 >
                     <FontAwesomeIcon icon={faTimesCircle} className="mr-2" />
                     Fake
                 </Button>
             </div>
-        </div>
+        </>
     );
 };
 
 Round.propTypes = {
     article: shape({}).isRequired,
-    handleRealButton: func.isRequired,
-    handleFakeButton: func.isRequired
+    handleRealPlay: func.isRequired,
+    handleFakePlay: func.isRequired
 };
 
 export default Round;

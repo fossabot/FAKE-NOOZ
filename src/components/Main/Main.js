@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { shape, oneOfType, string, number, func, bool } from 'prop-types';
+import classNames from 'classnames';
 import Helmet from 'react-helmet';
 import { Container, Row, Col } from 'react-bootstrap';
 import Parser from 'rss-parser';
 import Loading from '../Loading';
 import Game from './Game';
 import feedMetadata from '../../feedMetadata';
+import styles from './Main.module.scss';
 
 const parser = new Parser();
 const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
@@ -143,6 +145,12 @@ const Main = ({
                     sm={{ span: 10, offset: 1 }}
                     lg={{ span: 8, offset: 2 }}
                     xl={{ span: 6, offset: 3 }}
+                    aria-live="polite"
+                    className={classNames(
+                        styles.gameContainer,
+                        'py-4',
+                        'py-md-5'
+                    )}
                 >
                     {loading ? (
                         <Loading isLoading pastDelay />
@@ -158,8 +166,8 @@ const Main = ({
                                 handleNextRound,
                                 handleNewGame
                             }}
-                            handleRealButton={() => handlePlay(true)}
-                            handleFakeButton={() => handlePlay(false)}
+                            handleRealPlay={() => handlePlay(true)}
+                            handleFakePlay={() => handlePlay(false)}
                         />
                     )}
                 </Col>
