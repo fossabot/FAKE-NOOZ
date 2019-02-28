@@ -53,7 +53,7 @@ const Main = ({
                         );
                         return { ...feed, ...meta };
                     } catch (error) {
-                        console.error(error);
+                        console.error('Feed Fetch Error: ', error);
                         return {};
                     }
                 })
