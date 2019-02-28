@@ -1,6 +1,7 @@
 import React from 'react';
 import { arrayOf, shape, func } from 'prop-types';
 import classNames from 'classnames';
+import { isMobile } from 'react-device-detect';
 import { Form, Row, Col, Card, Button } from 'react-bootstrap';
 
 const StartGame = ({
@@ -25,7 +26,10 @@ const StartGame = ({
                     <Form.Group
                         as={Row}
                         controlId="number-of-rounds-form"
-                        className={classNames('mt-3', 'text-left')}
+                        className={classNames(
+                            isMobile ? 'my-3' : 'mt-3',
+                            'text-left'
+                        )}
                     >
                         <Form.Label
                             column
@@ -39,6 +43,11 @@ const StartGame = ({
                             <Form.Control
                                 as="select"
                                 value={gameRounds}
+                                className={classNames(
+                                    'bg-secondary',
+                                    'border-dark',
+                                    'text-white'
+                                )}
                                 onChange={handleRoundSetting}
                             >
                                 {roundOptions.map(option => (
@@ -52,6 +61,13 @@ const StartGame = ({
                             </Form.Control>
                         </Col>
                     </Form.Group>
+                    {isMobile && (
+                        <span>
+                            <i>Tip: </i>
+                            Swipe left to choose real and swipe right to choose
+                            fake.
+                        </span>
+                    )}
                 </Card.Body>
             </Card>
             <div

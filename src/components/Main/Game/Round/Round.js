@@ -6,14 +6,21 @@ import {
     shape,
     oneOfType,
     object,
-    array
+    array,
+    arrayOf,
+    node
 } from 'prop-types';
 import classNames from 'classnames';
 import { isMobile } from 'react-device-detect';
 import Swipe from 'react-easy-swipe';
 import { Card, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faTimesCircle } from '@fortawesome/pro-solid-svg-icons';
+import {
+    faCheckCircle,
+    faTimesCircle,
+    faArrowLeft,
+    faArrowRight
+} from '@fortawesome/pro-solid-svg-icons';
 import styles from './Round.module.scss';
 
 const browserWidth = () =>
@@ -29,8 +36,8 @@ const SwipeBadge = ({ active, label, variant, icon, className, ...props }) => (
     <div
         className={classNames(
             styles.swipeBadge,
-            styles[`swipe${label}`],
-            active && styles.swipeActive,
+            styles[`swipeBadge${label}`],
+            active && styles.swipeBadgeActive,
             'text-center',
             `text-${variant}`,
             className
@@ -40,7 +47,7 @@ const SwipeBadge = ({ active, label, variant, icon, className, ...props }) => (
         <FontAwesomeIcon
             icon={icon}
             size="2x"
-            className={classNames('mx-auto', 'mb-1')}
+            className={classNames('mx-auto', 'mb-1', 'd-block')}
         />
         {label}
     </div>
@@ -58,27 +65,68 @@ SwipeBadge.defaultProps = {
     className: undefined
 };
 
-const Round = ({
-    article: { title, content },
-    handleRealPlay,
-    handleFakePlay
-}) => {
-    const [cardXOffset, setCardXOffset] = useState(0);
+const BottomRow = ({ active, children, className, ...props }) => (
+    <div
+        className={classNames(
+            'mt-4',
+            'd-flex',
+            'align-items-center',
+            'justify-content-center',
+            'fade',
+            active && 'show',
+            className
+        )}
+        {...props}
+    >
+        {children}
+    </div>
+);
+
+BottomRow.propTypes = {
+    active: bool.isRequired,
+    children: oneOfType([node, arrayOf(node)]).isRequired,
+    className: string
+};
+
+BottomRow.defaultProps = {
+    className: undefined
+};
+
+const Round = ({ article: { title, content }, handlePlay }) => {
+    const cardXOffsetDefault = -35;
+    const [cardXOffset, setCardXOffset] = useState(cardXOffsetDefault);
+    const [swiping, setSwiping] = useState(false);
 
     const swipeThreshold = browserWidth() / 2.5;
-    const swipeReal = cardXOffset < -swipeThreshold;
-    const swipeFake = cardXOffset > swipeThreshold;
+    let swipe;
+    if (cardXOffset - cardXOffsetDefault < -swipeThreshold) swipe = 'Real';
+    else if (cardXOffset - cardXOffsetDefault > swipeThreshold) swipe = 'Fake';
+
+    const swipeReal = swipe === 'Real';
+    const swipeFake = swipe === 'Fake';
+
+    let cardVariant;
+    if (swipeReal) cardVariant = 'success';
+    else if (swipeFake) cardVariant = 'primary';
+
+    const [swipeEndClass, setSwipeEndClass] = useState();
 
     const onSwipeStart = () => {
-        console.info('Start swiping...');
+        setSwiping(true);
+        setSwipeEndClass();
     };
 
-    const onSwipeMove = ({ x }) => setCardXOffset(x);
+    const onSwipeMove = ({ x }) => setCardXOffset(x + cardXOffsetDefault);
 
     const onSwipeEnd = () => {
-        if (swipeReal) handleRealPlay();
-        else if (swipeFake) handleFakePlay();
-        else setCardXOffset(0);
+        setSwiping(false);
+        if (swipe) {
+            setSwipeEndClass(styles[`swipeEnd${swipe}`]);
+            setTimeout(() => handlePlay(swipeReal), 250);
+        } else {
+            setSwipeEndClass(styles.swipeEnd);
+            setCardXOffset();
+        }
     };
 
     const formattedArticle = content
@@ -109,61 +157,57 @@ const Round = ({
                     onSwipeMove,
                     onSwipeEnd
                 }}
-            >
-                <div
-                    className={classNames(
-                        'd-flex',
-                        'align-items-center',
-                        'position-relative'
-                    )}
-                    style={{ left: cardXOffset }}
-                >
-                    <SwipeBadge
-                        active={swipeFake}
-                        label="Fake"
-                        variant="primary"
-                        icon={faTimesCircle}
-                    />
-                    <Card>
-                        <Card.Body>
-                            <Card.Title
-                                aria-label="Article title"
-                                className={classNames(
-                                    !articleContentExists && 'mb-0'
-                                )}
-                            >
-                                {title}
-                            </Card.Title>
-                            {articleContentExists && (
-                                <article /* eslint-disable react/no-danger */
-                                    dangerouslySetInnerHTML={{
-                                        __html: formattedArticle
-                                    }}
-                                />
-                            )}
-                        </Card.Body>
-                    </Card>
-                    <SwipeBadge
-                        active={swipeReal}
-                        label="Real"
-                        variant="success"
-                        icon={faCheckCircle}
-                    />
-                </div>
-            </Swipe>
-            <div
                 className={classNames(
+                    styles.swipeContainer,
+                    swipeEndClass,
                     'd-flex',
                     'align-items-center',
-                    'justify-content-center',
-                    'mt-4'
+                    'position-relative'
                 )}
+                style={{ left: cardXOffset }}
             >
+                <SwipeBadge
+                    active={swipeFake}
+                    label="Fake"
+                    variant="primary"
+                    icon={faTimesCircle}
+                />
+                <Card
+                    bg={cardVariant}
+                    border={cardVariant}
+                    className={styles.card}
+                >
+                    <Card.Body>
+                        <Card.Title
+                            aria-label="Article title"
+                            className={classNames(
+                                !articleContentExists && 'mb-0'
+                            )}
+                        >
+                            {title}
+                        </Card.Title>
+                        {articleContentExists && (
+                            <article /* eslint-disable react/no-danger */
+                                dangerouslySetInnerHTML={{
+                                    __html: formattedArticle
+                                }}
+                            />
+                        )}
+                    </Card.Body>
+                </Card>
+                <SwipeBadge
+                    active={swipeReal}
+                    label="Real"
+                    variant="success"
+                    icon={faCheckCircle}
+                />
+            </Swipe>
+            <BottomRow active={!swiping}>
                 <Button
                     variant="success"
                     size="lg"
                     aria-label="It's real"
-                    onClick={handleRealPlay}
+                    onClick={() => handlePlay(true)}
                     className="mr-3"
                 >
                     <FontAwesomeIcon icon={faCheckCircle} className="mr-2" />
@@ -173,21 +217,42 @@ const Round = ({
                     variant="primary"
                     size="lg"
                     aria-label="It's fake"
-                    onClick={handleFakePlay}
+                    onClick={() => handlePlay(false)}
                     className="ml-3"
                 >
                     <FontAwesomeIcon icon={faTimesCircle} className="mr-2" />
                     Fake
                 </Button>
-            </div>
+            </BottomRow>
+            <BottomRow active={swiping} className="mt-n5">
+                <div className={classNames('mr-4', 'text-center')}>
+                    <div>
+                        <FontAwesomeIcon
+                            icon={faArrowLeft}
+                            className={classNames('mr-2', 'text-success')}
+                        />
+                        Real
+                    </div>
+                    <small>Swipe Left</small>
+                </div>
+                <div className={classNames('ml-4', 'text-center')}>
+                    <div>
+                        Fake
+                        <FontAwesomeIcon
+                            icon={faArrowRight}
+                            className={classNames('ml-2', 'text-primary')}
+                        />
+                    </div>
+                    <small>Swipe Right</small>
+                </div>
+            </BottomRow>
         </>
     );
 };
 
 Round.propTypes = {
     article: shape({}).isRequired,
-    handleRealPlay: func.isRequired,
-    handleFakePlay: func.isRequired
+    handlePlay: func.isRequired
 };
 
 export default Round;

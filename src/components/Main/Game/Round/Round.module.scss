@@ -1,20 +1,52 @@
 @import '../../../../variables';
 
-.swipeBadge {
-    font-size: 0;
-    transition: 0.5s font-size cubic-bezier(0.165, 0.84, 0.44, 1);
-    transform: translateX(-100%);
-    pointer-events: none;
+$transition-duration: 0.5s;
+$transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+@mixin transition($property) {
+    transition: $transition-duration $property $transition-timing-function;
 }
 
-.swipeReal {
+@mixin multi-transition($property1, $property2) {
+    transition:
+        $transition-duration $property1 $transition-timing-function,
+        $transition-duration $property2 $transition-timing-function;
+}
+
+.swipeContainer {
+    width: calc(100% + 70px);
+    left: -35px;
+
+    @include transition(transform);
+}
+
+.swipeBadge {
+    min-width: 35px;
+    font-size: 0;
+    transform: translateX(-100%);
+    pointer-events: none;
+
+    @include transition(font-size);
+}
+
+.swipeBadgeActive {
+    font-size: initial;
+}
+
+.swipeEnd {
+    @include multi-transition(transform, left);
+}
+
+.swipeBadgeReal,
+.swipeEndFake {
     transform: translateX(100%);
 }
 
-.swipeFake {
+.swipeBadgeFake,
+.swipeEndReal {
     transform: translateX(-100%);
 }
 
-.swipeActive {
-    font-size: initial;
+.card {
+    @include multi-transition(background-color, border-color);
 }

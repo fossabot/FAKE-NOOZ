@@ -13,8 +13,7 @@ const Game = ({
     handleStartGame,
     handleRoundSetting,
     handleNextRound,
-    handleRealPlay,
-    handleFakePlay,
+    handlePlay,
     handleNewGame
 }) => {
     const win = article && article.isReal === realPlay;
@@ -30,13 +29,7 @@ const Game = ({
                 />
             );
         case 'round':
-            return (
-                <Round
-                    article={article}
-                    handleRealPlay={handleRealPlay}
-                    handleFakePlay={handleFakePlay}
-                />
-            );
+            return <Round article={article} handlePlay={handlePlay} />;
         case 'result':
             return (
                 <Result
@@ -60,8 +53,7 @@ Game.propTypes = {
     handleStartGame: func.isRequired,
     handleRoundSetting: func.isRequired,
     handleNextRound: func.isRequired,
-    handleRealPlay: func.isRequired,
-    handleFakePlay: func.isRequired,
+    handlePlay: func.isRequired,
     handleNewGame: func.isRequired
 };
 

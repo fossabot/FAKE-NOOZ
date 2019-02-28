@@ -164,10 +164,9 @@ const Main = ({
                                 handleStartGame,
                                 handleRoundSetting,
                                 handleNextRound,
+                                handlePlay,
                                 handleNewGame
                             }}
-                            handleRealPlay={() => handlePlay(true)}
-                            handleFakePlay={() => handlePlay(false)}
                         />
                     )}
                 </Col>
