@@ -73,7 +73,7 @@ const BottomRow = ({ active, children, className, ...props }) => (
             'align-items-center',
             'justify-content-center',
             'fade',
-            active && 'show',
+            active ? 'show' : styles.bottomRowDisabled,
             className
         )}
         {...props}
@@ -111,14 +111,14 @@ const Round = ({ article: { title, content }, handlePlay }) => {
 
     const [swipeEndClass, setSwipeEndClass] = useState();
 
-    const onSwipeStart = () => {
+    const handleSwipeStart = () => {
         setSwiping(true);
         setSwipeEndClass();
     };
 
-    const onSwipeMove = ({ x }) => setCardXOffset(x + cardXOffsetDefault);
+    const handleSwipeMove = ({ x }) => setCardXOffset(x + cardXOffsetDefault);
 
-    const onSwipeEnd = () => {
+    const handleSwipeEnd = () => {
         setSwiping(false);
         if (swipe) {
             setSwipeEndClass(styles[`swipeEnd${swipe}`]);
@@ -128,6 +128,9 @@ const Round = ({ article: { title, content }, handlePlay }) => {
             setCardXOffset();
         }
     };
+
+    const handlePlayReal = () => handlePlay(true);
+    const handlePlayFake = () => handlePlay(false);
 
     const formattedArticle = content
         .replace(/^\s+/g, '') // Remove lead space
@@ -153,9 +156,9 @@ const Round = ({ article: { title, content }, handlePlay }) => {
             </h3>
             <Swipe
                 {...isMobile && {
-                    onSwipeStart,
-                    onSwipeMove,
-                    onSwipeEnd
+                    onSwipeStart: handleSwipeStart,
+                    onSwipeMove: handleSwipeMove,
+                    onSwipeEnd: handleSwipeEnd
                 }}
                 className={classNames(
                     styles.swipeContainer,
@@ -207,7 +210,7 @@ const Round = ({ article: { title, content }, handlePlay }) => {
                     variant="success"
                     size="lg"
                     aria-label="It's real"
-                    onClick={() => handlePlay(true)}
+                    onClick={handlePlayReal}
                     className="mr-3"
                 >
                     <FontAwesomeIcon icon={faCheckCircle} className="mr-2" />
@@ -217,14 +220,14 @@ const Round = ({ article: { title, content }, handlePlay }) => {
                     variant="primary"
                     size="lg"
                     aria-label="It's fake"
-                    onClick={() => handlePlay(false)}
+                    onClick={handlePlayFake}
                     className="ml-3"
                 >
                     <FontAwesomeIcon icon={faTimesCircle} className="mr-2" />
                     Fake
                 </Button>
             </BottomRow>
-            <BottomRow active={swiping} className="mt-n5">
+            <BottomRow active={swiping && !swipe} className="mt-n5">
                 <div className={classNames('mr-4', 'text-center')}>
                     <div>
                         <FontAwesomeIcon

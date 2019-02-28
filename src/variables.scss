@@ -428,11 +428,11 @@ $input-padding-x-lg:                    $input-btn-padding-x-lg;
 $input-font-size-lg:                    $input-btn-font-size-lg;
 $input-line-height-lg:                  $input-btn-line-height-lg;
 
-$input-bg:                              $white;
-$input-disabled-bg:                     $gray-200;
+$input-bg:                              $gray-600;
+$input-disabled-bg:                     $gray-900;
 
-$input-color:                           $gray-700;
-$input-border-color:                    $gray-400;
+$input-color:                           $gray-100;
+$input-border-color:                    $gray-800;
 $input-border-width:                    $input-btn-border-width;
 $input-box-shadow:                      inset 0 1px 1px rgba($black, 0.075);
 
@@ -483,7 +483,7 @@ $custom-control-gutter:                 1.5rem;
 $custom-control-spacer-x:               1rem;
 
 $custom-control-indicator-size:         1rem;
-$custom-control-indicator-bg:           $gray-300;
+$custom-control-indicator-bg:           $gray-100;
 $custom-control-indicator-bg-size:      50% 50%;
 $custom-control-indicator-box-shadow:   inset 0 0.25rem 0.25rem rgba($black, 0.1);
 
@@ -523,7 +523,7 @@ $custom-select-disabled-color:      $gray-600;
 $custom-select-bg:                  $input-bg;
 $custom-select-disabled-bg:         $gray-200;
 $custom-select-bg-size:             8px 10px; // In pixels because image dimensions
-$custom-select-indicator-color:     $gray-800;
+$custom-select-indicator-color:     $gray-100;
 $custom-select-indicator:           str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='#{$custom-select-indicator-color}' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E"), '#', '%23');
 $custom-select-background:          $custom-select-indicator no-repeat right $custom-select-padding-x center / $custom-select-bg-size; // Used so we can have multiple background elements (e.g., arrow and feedback icon)
 

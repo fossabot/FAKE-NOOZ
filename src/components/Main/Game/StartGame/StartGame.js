@@ -43,12 +43,8 @@ const StartGame = ({
                             <Form.Control
                                 as="select"
                                 value={gameRounds}
-                                className={classNames(
-                                    'bg-secondary',
-                                    'border-dark',
-                                    'text-white'
-                                )}
                                 onChange={handleRoundSetting}
+                                className="custom-select"
                             >
                                 {roundOptions.map(option => (
                                     <option key={option} value={option}>
@@ -62,7 +58,7 @@ const StartGame = ({
                         </Col>
                     </Form.Group>
                     {isMobile && (
-                        <span>
+                        <span className="text-muted">
                             <i>Tip: </i>
                             Swipe left to choose real and swipe right to choose
                             fake.
